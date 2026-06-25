@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Terp — Higher ground for European AI</title>
+<meta name="description" content="Terp is the sovereign, open AI coding platform that runs on European soil and answers to no one outside it. Build on ground you own." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230c0b08'/><path d='M14 70 H86 M28 70 a22 22 0 0 1 44 0' stroke='%23F26A1B' stroke-width='7' fill='none' stroke-linecap='round'/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0b08;--bg2:#121009;--panel:#16140d;--panel2:#1c190f;--line:#2c2820;--line2:#211e16;
+    --ink:#f4f0e7;--ink2:#cdc6b6;--mut:#938a78;--amber:#f26a1b;--amber2:#ff8b45;--onamber:#190f04;
+    --disp:'Archivo',-apple-system,sans-serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;
+    --max:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 30px}
+  section{position:relative}
+  h1,h2,h3{font-family:var(--disp);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+  .mono{font-family:var(--mono);font-size:.73rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}
+  .kick{color:var(--amber2);display:inline-flex;align-items:center;gap:11px}
+  .kick:before{content:"";width:22px;height:1px;background:var(--amber)}
+  .display{font-family:var(--disp);font-weight:900;letter-spacing:-.035em;line-height:.96;text-transform:uppercase}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:60;background:rgba(12,11,8,.7);backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line2)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--disp);font-weight:800;font-size:1.15rem;letter-spacing:.02em;text-transform:uppercase}
+  .mark{width:34px;height:34px;border:1px solid var(--line);display:grid;place-items:center;flex:0 0 auto}
+  .mark svg{width:22px;height:22px}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-size:.9rem;color:var(--ink2);font-weight:450}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{display:inline-block;padding:12px 22px;font-weight:600;font-size:.92rem;transition:.16s;cursor:pointer;border:1px solid transparent;font-family:var(--sans)}
+  .btn-primary{background:var(--amber);color:#fff}
+  .btn-primary:hover{background:var(--amber2);color:var(--onamber)}
+  .btn-ghost{border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber2)}
+  @media(max-width:820px){.nav-links a:not(.btn){display:none}}
+
+  /* HERO */
+  .hero{position:relative;min-height:90vh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.55) sepia(.32) contrast(1.08) brightness(.6) saturate(.9);z-index:0}
+  .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,11,8,.7) 0%,rgba(12,11,8,.2) 30%,rgba(12,11,8,.55) 70%,rgba(12,11,8,.96) 100%),linear-gradient(100deg,rgba(12,11,8,.7),transparent 60%);z-index:1}
+  .hero .wrap{position:relative;z-index:2;padding:0 30px 78px;width:100%}
+  .hero .kick{margin-bottom:26px}
+  h1.hero-h{font-family:var(--disp);font-weight:900;letter-spacing:-.035em;line-height:.92;font-size:clamp(3rem,9vw,7rem);text-transform:uppercase;max-width:14ch}
+  h1.hero-h em{font-style:normal;color:var(--amber2)}
+  .hero-sub{font-size:clamp(1.1rem,1.7vw,1.34rem);color:var(--ink2);max-width:48ch;margin-top:28px}
+  .hero-cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .hero-cta .btn{padding:15px 30px;font-size:1rem}
+
+  /* manifesto */
+  .manifesto{border-bottom:1px solid var(--line);background:var(--bg2)}
+  .manifesto .wrap{padding:90px 30px;display:grid;grid-template-columns:.7fr 1.3fr;gap:50px}
+  .manifesto .lt{font-family:var(--mono);font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber2);padding-top:8px}
+  .manifesto p{font-family:var(--disp);font-weight:600;font-size:clamp(1.5rem,2.7vw,2.15rem);line-height:1.22;letter-spacing:-.02em}
+  .manifesto p .dim{color:var(--mut)}
+  .manifesto .small{font-family:var(--sans);font-weight:400;font-size:1.02rem;color:var(--ink2);line-height:1.6;margin-top:24px;max-width:54ch}
+  @media(max-width:820px){.manifesto .wrap{grid-template-columns:1fr;gap:24px}}
+
+  /* section heading */
+  .sec{padding:96px 0;border-bottom:1px solid var(--line)}
+  .sec-h{font-size:clamp(2rem,4vw,3.2rem);max-width:18ch}
+  .sec-lead{color:var(--ink2);font-size:1.08rem;max-width:60ch;margin-top:20px}
+
+  /* problem rows */
+  .rows{margin-top:54px;border-top:1px solid var(--line)}
+  .prow{display:grid;grid-template-columns:90px 1fr 1.4fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .prow .n{font-family:var(--mono);font-size:.8rem;color:var(--amber2)}
+  .prow h3{font-family:var(--disp);font-weight:700;font-size:1.42rem;letter-spacing:-.01em}
+  .prow p{color:var(--ink2);font-size:1rem}
+  @media(max-width:760px){.prow{grid-template-columns:1fr;gap:8px}}
+
+  /* photo divider */
+  .divider{position:relative;min-height:480px;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid var(--line)}
+  .divider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.5) sepia(.32) contrast(1.07) brightness(.66) saturate(.9);z-index:0}
+  .divider:after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(12,11,8,.92) 0%,rgba(12,11,8,.4) 55%,rgba(242,106,27,.22) 100%);z-index:1}
+  .divider .pc{position:relative;z-index:2;padding:56px 0}
+  .divider h2{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:18ch;margin-top:14px}
+  .divider p{color:var(--ink2);max-width:48ch;margin-top:16px;font-size:1.05rem}
+
+  /* stack */
+  .stackgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:54px;background:var(--line);border:1px solid var(--line)}
+  .scol{background:var(--panel);padding:34px 28px;min-height:230px;display:flex;flex-direction:column}
+  .scol .ix{font-family:var(--mono);font-size:.72rem;color:var(--amber2);letter-spacing:.12em}
+  .scol h3{font-family:var(--disp);font-weight:700;font-size:1.45rem;margin:16px 0 10px}
+  .scol p{color:var(--ink2);font-size:.96rem}
+  .scol.f{background:var(--panel2);border-top:2px solid var(--amber)}
+  .scol .tag{margin-top:auto;font-family:var(--mono);font-size:.68rem;color:var(--amber2);letter-spacing:.06em;padding-top:18px}
+  @media(max-width:820px){.stackgrid{grid-template-columns:1fr}}
+
+  /* capabilities */
+  .caps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:54px;background:var(--line);border:1px solid var(--line)}
+  .cap{background:var(--bg);padding:30px 26px}
+  .cap .k{font-family:var(--mono);font-size:.72rem;color:var(--amber2);letter-spacing:.1em}
+  .cap h3{font-family:var(--disp);font-weight:700;font-size:1.18rem;margin:14px 0 8px}
+  .cap p{color:var(--ink2);font-size:.93rem}
+  @media(max-width:820px){.caps{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.caps{grid-template-columns:1fr}}
+
+  /* tiers */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:54px}
+  .tier{border:1px solid var(--line);background:var(--panel);padding:32px 28px;position:relative}
+  .tier.hl{border-color:var(--amber)}
+  .tier .num{font-family:var(--mono);font-size:.74rem;color:var(--amber2);letter-spacing:.1em}
+  .tier h3{font-family:var(--disp);font-weight:800;font-size:1.5rem;margin:10px 0 4px;text-transform:uppercase;letter-spacing:-.01em}
+  .tier .where{font-family:var(--mono);font-size:.78rem;color:var(--mut);margin-bottom:20px}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .tier li{font-size:.94rem;color:var(--ink2);display:flex;gap:11px}
+  .tier li:before{content:"";width:6px;height:6px;background:var(--amber);margin-top:8px;flex:0 0 auto}
+  .tier .pill{position:absolute;top:-11px;left:28px;background:var(--amber);color:var(--onamber);font-family:var(--mono);font-size:.65rem;letter-spacing:.08em;padding:4px 11px;font-weight:500}
+  @media(max-width:820px){.tiers{grid-template-columns:1fr}}
+
+  /* compare */
+  table.cmp{width:100%;border-collapse:collapse;margin-top:50px}
+  table.cmp th,table.cmp td{padding:18px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:.98rem}
+  table.cmp thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--mut);font-weight:500;text-transform:uppercase}
+  table.cmp th.us{color:var(--amber2)}
+  table.cmp td:first-child{color:var(--ink2)}
+  table.cmp .cu{background:rgba(242,106,27,.09)}
+  .y{color:var(--amber2);font-weight:600}.nn{color:var(--mut)}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .cta img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.5) sepia(.3) contrast(1.05) brightness(.5);z-index:0}
+  .cta:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(12,11,8,.94),rgba(242,106,27,.3));z-index:1}
+  .cta .wrap{position:relative;z-index:2;padding:108px 30px;text-align:center}
+  .cta h2{font-size:clamp(2.2rem,5vw,3.8rem);max-width:16ch;margin:0 auto;text-transform:uppercase;letter-spacing:-.03em}
+  .cta p{color:var(--ink2);max-width:52ch;margin:22px auto 0;font-size:1.1rem}
+  .cta .btn{margin-top:34px;padding:16px 36px;font-size:1.06rem}
+  .cta .alt{margin-top:14px;font-family:var(--mono);font-size:.78rem;color:var(--mut);letter-spacing:.04em}
+  .cta .alt a{color:var(--amber2)}
+
+  footer{padding:50px 0;background:var(--bg)}
+  .foot-in{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px}
+  .foot-links{display:flex;gap:26px;font-size:.9rem;color:var(--ink2)}
+  .foot-links a:hover{color:var(--amber2)}
+  .disc{font-size:.76rem;color:var(--mut);margin-top:24px;max-width:78ch;line-height:1.6}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 100 100"><path d="M14 70 H86 M28 70 a22 22 0 0 1 44 0" stroke="#F26A1B" stroke-width="7" fill="none" stroke-linecap="round"/></svg></span>Terp</a>
+  <nav class="nav-links">
+    <a href="#tide">The tide</a>
+    <a href="#build">What you build on</a>
+    <a href="#deploy">Deployment</a>
+    <a href="#access" class="btn btn-primary">Request access</a>
+  </nav>
+</div></header>
+
+<a id="top"></a>
+<section class="hero">
+  <img class="bg" src="https://images.unsplash.com/photo-1561751922-c495b5b23896?w=2000&q=80&auto=format&fit=crop" alt="Aerial view of Dutch farmland" fetchpriority="high">
+  <div class="wrap">
+    <div class="mono kick">Sovereign AI · Built in Europe</div>
+    <h1 class="hero-h">Higher ground<br>for <em>European AI</em></h1>
+    <p class="hero-sub">Terp is the open AI coding platform that runs on European soil and answers to no one outside it. Stop renting your capability from abroad. Build on ground you own.</p>
+    <div class="hero-cta">
+      <a href="#access" class="btn btn-primary">Request access</a>
+      <a href="#build" class="btn btn-ghost">What you build on</a>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="wrap">
+    <div class="lt">Why "Terp"</div>
+    <div>
+      <p>For two thousand years, before the dikes, the people of the low countries raised <span class="dim">terps</span> — mounds of earth built by hand to keep their homes above the floodwater. They didn't wait to be rescued. <span class="dim">They built the ground they needed.</span></p>
+      <p class="small">Europe's institutions face a rising tide of dependence on AI they don't control — models that can be priced, throttled, or switched off by decisions made an ocean away. Terp is the high ground they build for themselves: sovereign, open, and standing on European soil.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="tide">
+  <div class="wrap">
+    <div class="mono kick">The rising tide</div>
+    <h2 class="sec-h" style="margin-top:18px">The dependency was invisible — until the water rose.</h2>
+    <p class="sec-lead">In June 2026, Washington ordered an American AI company to cut its models off from every foreign national overnight. The lesson landed across every European campus and boardroom at once: capability you rent can be taken back.</p>
+    <div class="rows">
+      <div class="prow reveal"><div class="n">01</div><h3>It leaves your jurisdiction</h3><p>US-hosted assistants send your source, research and prompts across the Atlantic. Under the CLOUD Act, that's a line European legal and data-protection offices will not cross.</p></div>
+      <div class="prow reveal"><div class="n">02</div><h3>It can be revoked</h3><p>A tool your people depend on can be throttled or shut off by a foreign government, or a vendor's change of terms, with no recourse. Dependence is now a strategic risk.</p></div>
+      <div class="prow reveal"><div class="n">03</div><h3>It can't be signed off</h3><p>No DPA on acceptable terms, no transparency, no auditability. Procurement and ethics boards have nothing to approve — so the best tools stay banned.</p></div>
+      <div class="prow reveal"><div class="n">04</div><h3>It puts data at risk</h3><p>Student records and sensitive research fall under GDPR. A black-box model in another country is a non-starter the moment real data is involved.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="divider">
+  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=2000&q=80&auto=format&fit=crop" alt="Inside a European data centre" loading="lazy">
+  <div class="wrap pc">
+    <div class="mono kick">It runs where you say it runs</div>
+    <h2>Your prompts never leave the continent.</h2>
+    <p>A sovereign EU cloud, a national data centre, or your own racks. The weights are yours; the jurisdiction is European; the audit trail is one you can read.</p>
+  </div>
+</section>
+
+<section class="sec" id="build">
+  <div class="wrap">
+    <div class="mono kick">What you build on</div>
+    <h2 class="sec-h" style="margin-top:18px">Three open layers. One sovereign stack.</h2>
+    <p class="sec-lead">Terp isn't a new model. It's the thin, transparent layer that turns proven open components into infrastructure an institution can own, inspect and host — and never be locked out of.</p>
+    <div class="stackgrid">
+      <div class="scol"><div class="ix">LAYER 01 / AGENT</div><h3>Open agent</h3><p>A capable coding agent in the terminal, the IDE, and the browser. Fully open, no telemetry, nothing phoning home.</p><div class="tag">YOU CAN READ EVERY LINE</div></div>
+      <div class="scol"><div class="ix">LAYER 02 / MODEL</div><h3>Open weights</h3><p>Run today's strongest open model and swap it tomorrow. European when European is ready. Never bound to one lab or one country.</p><div class="tag">SWAPPABLE IN ONE LINE</div></div>
+      <div class="scol f"><div class="ix">LAYER 03 / COMPUTE</div><h3>European soil</h3><p>Served on an EU gateway, a sovereign cloud, or your own cluster. The boundary the whole platform is built to hold.</p><div class="tag">DATA STAYS IN THE EU</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="mono kick">Capabilities</div>
+    <h2 class="sec-h" style="margin-top:18px">Everything the policy office asks for.</h2>
+    <div class="caps">
+      <div class="cap"><div class="k">/ residency</div><h3>EU data residency</h3><p>Prompts, code and output never leave European jurisdiction. Name the data centre, and prove it.</p></div>
+      <div class="cap"><div class="k">/ identity</div><h3>Federated SSO</h3><p>SURFconext and institutional identity built in. Roll out to a faculty without a single new account.</p></div>
+      <div class="cap"><div class="k">/ audit</div><h3>Readable audit logs</h3><p>No telemetry. Configurable logging your DPO can actually inspect — and therefore approve.</p></div>
+      <div class="cap"><div class="k">/ policy</div><h3>Guardrails</h3><p>Per-institution allowlists, redaction, path limits, retention. Your AI-use policy, enforced in software.</p></div>
+      <div class="cap"><div class="k">/ open</div><h3>Open source</h3><p>Permissive licences end to end. No lock-in, procurement-friendly, forkable by your own staff.</p></div>
+      <div class="cap"><div class="k">/ deploy</div><h3>Self-hostable</h3><p>From a managed EU endpoint to fully air-gapped. The same platform, at any level of privacy you require.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="divider">
+  <img src="https://images.unsplash.com/photo-1593495603376-7ae2d9ec46f1?w=2000&q=80&auto=format&fit=crop" alt="European institutional architecture" loading="lazy">
+  <div class="wrap pc">
+    <div class="mono kick">Built for the public sector</div>
+    <h2>For the institutions that can't afford to be cut off.</h2>
+    <p>Universities, governments, and regulated enterprise — the organisations that most need AI, and are least free to send their work abroad.</p>
+  </div>
+</section>
+
+<section class="sec" id="deploy">
+  <div class="wrap">
+    <div class="mono kick">Deployment</div>
+    <h2 class="sec-h" style="margin-top:18px">Stand up in a week. Scale to national infrastructure.</h2>
+    <div class="tiers">
+      <div class="tier"><div class="num">TIER 0</div><h3>Gateway</h3><div class="where">EU-hosted endpoint</div><ul><li>Live in days, no infrastructure</li><li>Ideal for a course or pilot team</li><li>Lowest cost to start</li><li>EU residency guaranteed</li></ul></div>
+      <div class="tier hl"><span class="pill">PILOT PATH</span><div class="num">TIER 1</div><h3>Sovereign host</h3><div class="where">EU GPUs · national compute</div><ul><li>Served on European infrastructure</li><li>Data stays on the continent</li><li>Shared, sovereign, cost-efficient</li><li>Interactive by day, batch by night</li></ul></div>
+      <div class="tier"><div class="num">TIER 2</div><h3>Air-gapped</h3><div class="where">Your own cluster</div><ul><li>For medical, legal &amp; sensitive research</li><li>Nothing leaves your network</li><li>Full control of weights and logs</li><li>Maximum assurance for ethics boards</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="mono kick">The difference</div>
+    <h2 class="sec-h" style="margin-top:18px">Not about being better. About being yours.</h2>
+    <table class="cmp">
+      <thead><tr><th></th><th class="us">Terp</th><th>US closed agents</th></tr></thead>
+      <tbody>
+        <tr><td>Runs inside the EU</td><td class="cu"><span class="y">Yes</span></td><td><span class="nn">No</span></td></tr>
+        <tr><td>Open source &amp; auditable</td><td class="cu"><span class="y">Yes</span></td><td><span class="nn">No</span></td></tr>
+        <tr><td>Self-hostable / air-gappable</td><td class="cu"><span class="y">Yes</span></td><td><span class="nn">No</span></td></tr>
+        <tr><td>Can't be revoked from abroad</td><td class="cu"><span class="y">Yes</span></td><td><span class="nn">No</span></td></tr>
+        <tr><td>Signable DPA on your terms</td><td class="cu"><span class="y">Yes</span></td><td><span class="nn">Rarely</span></td></tr>
+        <tr><td>Cost per million tokens</td><td class="cu"><span class="y">~€1.4 / €4.2</span></td><td><span class="nn">~€4.6 / €23</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cta" id="access">
+  <img src="https://images.unsplash.com/photo-1534801425708-1c57ee8a2fc8?w=2000&q=80&auto=format&fit=crop" alt="Aerial view of Dutch polder landscape" loading="lazy">
+  <div class="wrap">
+    <div class="mono kick" style="justify-content:center;margin-bottom:20px">Higher ground</div>
+    <h2>Build on ground you own.</h2>
+    <p>We're standing up the first deployments with European universities and research groups now. A pilot takes a week — and gives your policy office something it can finally say yes to.</p>
+    <a href="mailto:hello@terp.eu?subject=Terp%20access" class="btn btn-primary">Request access</a>
+    <div class="alt">or read the code on <a href="#">GitHub</a> · <a href="mailto:hello@terp.eu">hello@terp.eu</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 100 100"><path d="M14 70 H86 M28 70 a22 22 0 0 1 44 0" stroke="#F26A1B" stroke-width="7" fill="none" stroke-linecap="round"/></svg></span>Terp</a>
+    <div class="foot-links">
+      <a href="#tide">The tide</a>
+      <a href="#build">What you build on</a>
+      <a href="#deploy">Deployment</a>
+      <a href="mailto:hello@terp.eu">Contact</a>
+    </div>
+    <div class="mono" style="color:var(--mut)">Higher ground for European AI</div>
+  </div>
+  <div class="wrap"><p class="disc">Terp is an early-stage concept and working title. Open-weight models referenced can be served behind the agent; names and trademarks belong to their respective owners. SURFconext, TU Delft and European institutions are referenced as relevant context, not as endorsements or partners. Pricing is indicative.</p></div>
+</footer>
+
+<script>
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.08,rootMargin:'0px 0px 120% 0px'});
+  els.forEach((el,i)=>{el.style.transitionDelay=(i%4*55)+'ms';io.observe(el)});
+  setTimeout(()=>els.forEach(e=>e.classList.add('in')),1400);
+</script>
+</body>
+</html>
