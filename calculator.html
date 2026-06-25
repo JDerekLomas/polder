@@ -3,22 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Polder — Margin Calculator</title>
-<meta name="description" content="Interactive unit-economics model for a sovereign EU AI coding service: seats, token burn, resale vs self-host, model routing, team cost, and net margin." />
+<title>Polder — Business Model Calculator</title>
+<meta name="description" content="A simple unit-economics model for Polder: a few institutional buyers, resold AI access at a margin, plus training & customization services." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231846a0'/><path d='M22 64 L40 40 L52 56 L64 36 L80 64' stroke='white' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
 <style>
   :root{
     --delft:#1846a0;--delft-deep:#11306e;--delft-bright:#2f6fd6;
     --ink:#0e1726;--slate:#48566b;--line:#e2e8f2;--bg:#fbfcfe;--tint:#eef3fb;--white:#fff;
-    --good:#1a8f5e;--bad:#c2443a;--amber:#b8860b;
+    --good:#1a8f5e;--bad:#c2443a;
     --serif:ui-serif,Georgia,"Times New Roman",serif;
     --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-  a{color:var(--delft);text-decoration:none}
-  a:hover{text-decoration:underline}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  a{color:var(--delft);text-decoration:none}a:hover{text-decoration:underline}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
   h1,h2,h3{font-family:var(--serif);letter-spacing:-.02em;line-height:1.12}
 
   header.nav{position:sticky;top:0;z-index:50;background:rgba(251,252,254,.85);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
@@ -28,46 +27,31 @@
   .logo svg{width:21px;height:21px}
   .nav a{font-size:.9rem;color:var(--slate);font-weight:500}
 
-  .head{padding:42px 0 14px}
-  .head h1{font-size:clamp(1.9rem,4vw,2.7rem)}
-  .head p{color:var(--slate);max-width:62ch;margin-top:12px;font-size:1.04rem}
+  .head{padding:42px 0 8px}
+  .head h1{font-size:clamp(1.9rem,4vw,2.6rem)}
+  .head p{color:var(--slate);max-width:64ch;margin-top:12px;font-size:1.04rem}
   .badge-row{margin-top:16px;display:flex;gap:8px;flex-wrap:wrap}
   .chip{font-size:.72rem;font-weight:700;letter-spacing:.04em;padding:4px 10px;border-radius:999px;background:var(--tint);color:var(--delft)}
 
-  .layout{display:grid;grid-template-columns:1fr 420px;gap:34px;align-items:start;padding:26px 0 80px}
-  @media(max-width:920px){.layout{grid-template-columns:1fr}}
+  .layout{display:grid;grid-template-columns:1fr 400px;gap:34px;align-items:start;padding:26px 0 70px}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
 
   .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;margin-bottom:20px}
   .panel h3{font-size:1.05rem;margin-bottom:4px}
   .panel .ph{color:var(--slate);font-size:.85rem;margin-bottom:18px}
 
-  .ctrl{margin-bottom:20px}
-  .ctrl:last-child{margin-bottom:0}
+  .ctrl{margin-bottom:20px}.ctrl:last-child{margin-bottom:0}
   .ctrl label{display:flex;justify-content:space-between;align-items:baseline;font-size:.92rem;font-weight:600;margin-bottom:7px}
-  .ctrl label .val{font-family:var(--serif);font-size:1.02rem;color:var(--delft);font-weight:600}
+  .ctrl label .val{font-family:var(--serif);font-size:1.05rem;color:var(--delft);font-weight:600}
   .ctrl .hint{font-size:.78rem;color:var(--slate);margin-top:5px}
   input[type=range]{width:100%;accent-color:var(--delft);height:5px;cursor:pointer}
   .marks{display:flex;justify-content:space-between;font-size:.68rem;color:#94a3b8;margin-top:3px}
 
-  .seg{display:flex;background:var(--tint);border-radius:10px;padding:4px;gap:4px}
-  .seg button{flex:1;border:0;background:transparent;padding:9px;border-radius:7px;font-weight:600;font-size:.86rem;cursor:pointer;color:var(--slate);font-family:var(--sans)}
-  .seg button.on{background:#fff;color:var(--delft);box-shadow:0 1px 3px rgba(15,23,38,.1)}
-
-  details.adv{border-top:1px solid var(--line);margin-top:8px;padding-top:14px}
-  details.adv summary{cursor:pointer;font-size:.85rem;font-weight:600;color:var(--slate);list-style:none}
-  details.adv summary::-webkit-details-marker{display:none}
-  details.adv summary:before{content:"▸ ";color:var(--delft)}
-  details.adv[open] summary:before{content:"▾ "}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;margin-top:14px}
-  .mini label{font-size:.8rem;font-weight:600;display:block;margin-bottom:4px}
-  .mini input{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:7px;font-size:.88rem;font-family:var(--sans)}
-
-  /* results */
   .results{position:sticky;top:78px}
-  .hero-num{background:linear-gradient(135deg,var(--delft),var(--delft-deep));color:#fff;border-radius:18px;padding:26px 24px;margin-bottom:16px}
-  .hero-num .lbl{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#bcd0f2;font-weight:700}
-  .hero-num .big{font-family:var(--serif);font-size:3rem;font-weight:600;line-height:1;margin:8px 0 2px}
-  .hero-num .sub{font-size:.92rem;color:#d4e1f7}
+  .hero-num{background:linear-gradient(135deg,var(--delft),var(--delft-deep));color:#fff;border-radius:18px;padding:24px 22px;margin-bottom:16px}
+  .hero-num .lbl{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:#bcd0f2;font-weight:700}
+  .hero-num .big{font-family:var(--serif);font-size:2.7rem;font-weight:600;line-height:1;margin:8px 0 2px}
+  .hero-num .sub{font-size:.9rem;color:#d4e1f7}
   .hero-num.neg{background:linear-gradient(135deg,#9b3b33,#6f2a24)}
   .hero-num.neg .lbl{color:#f3c9c4}.hero-num.neg .sub{color:#f1d3cf}
 
@@ -77,24 +61,22 @@
   .row .k{color:var(--slate)}
   .row .v{font-family:var(--serif);font-weight:600;font-size:1.02rem}
   .row.sub{padding:9px 18px 9px 30px;background:var(--bg)}
-  .row.sub .k,.row.sub .v{font-size:.84rem;font-family:var(--sans);font-weight:500}
+  .row.sub .k,.row.sub .v{font-size:.83rem;font-family:var(--sans);font-weight:500}
   .row.tot{background:var(--tint)}
   .pos{color:var(--good)}.negc{color:var(--bad)}
-  .pick{font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--good);color:#fff;margin-left:7px;letter-spacing:.03em}
-
   .callout{margin-top:16px;background:var(--tint);border-left:3px solid var(--delft);border-radius:0 10px 10px 0;padding:14px 16px;font-size:.88rem;color:#33415a}
   .callout b{color:var(--ink)}
 
-  .notes{margin-top:30px}
-  .notes h2{font-size:1.4rem;margin-bottom:10px}
+  .notes{margin-top:24px}
+  .notes h2{font-size:1.35rem;margin-bottom:10px}
   .notes details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px;background:#fff}
-  .notes summary{cursor:pointer;font-weight:600;font-size:.96rem}
+  .notes summary{cursor:pointer;font-weight:600;font-size:.95rem}
   .notes table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.85rem}
   .notes td{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
-  .notes td:first-child{color:var(--slate);width:42%}
+  .notes td:first-child{color:var(--slate);width:46%}
   .flag{font-size:.66rem;font-weight:700;padding:1px 6px;border-radius:4px;margin-left:6px}
   .firm{background:#dcfce7;color:#166534}.est{background:#fef3c7;color:#92400e}
-  .disc{font-size:.78rem;color:#90a0b8;margin-top:16px;max-width:75ch}
+  .disc{font-size:.78rem;color:#90a0b8;margin-top:14px;max-width:75ch}
   footer{border-top:1px solid var(--line);padding:30px 0;color:var(--slate);font-size:.85rem}
 </style>
 </head>
@@ -105,114 +87,87 @@
 </div></header>
 
 <div class="wrap head">
-  <h1>Unit-economics calculator</h1>
-  <p>A live margin model for running Polder as a managed service. Defaults are grounded in June 2026 research (token burn, GPU throughput, model-routing, EU salaries, managed-OSS margins) — every assumption is cited below. Drag the knobs; the economics update instantly.</p>
+  <h1>The simple business model</h1>
+  <p>A handful of institutional buyers — TU Delft–sized universities and large companies. We resell sovereign AI coding access at a margin, and add training &amp; customization on top. No GPUs to own, no 24/7 fleet — a lean team and a few good deals. Drag the knobs.</p>
   <div class="badge-row">
-    <span class="chip">GLM-5.2-class MoE</span><span class="chip">resale vs self-host</span><span class="chip">model routing</span><span class="chip">EU salaries</span>
+    <span class="chip">resale + margin</span><span class="chip">training &amp; customization</span><span class="chip">institutional deals</span><span class="chip">lean team</span>
   </div>
 </div>
 
 <div class="wrap layout">
-  <!-- INPUTS -->
   <div>
     <div class="panel">
-      <h3>Scale &amp; revenue</h3>
-      <div class="ph">Who you serve and what you charge.</div>
+      <h3>The deals</h3>
+      <div class="ph">A small number of institutional customers.</div>
       <div class="ctrl">
-        <label>Provisioned seats (licensed) <span class="val" id="vSeats">2,000</span></label>
-        <input type="range" id="seats" min="100" max="40000" step="100" value="2000">
-        <div class="marks"><span>100</span><span>20k</span><span>40k</span></div>
+        <label>Institutional customers <span class="val" id="vInst">5</span></label>
+        <input type="range" id="inst" min="1" max="40" step="1" value="5">
+        <div class="hint">Universities + large companies. Each is one sales relationship, not a self-serve signup.</div>
       </div>
       <div class="ctrl">
-        <label>Active utilization <span class="val" id="vActive">40%</span></label>
+        <label>Avg seats per customer <span class="val" id="vSeats">1,000</span></label>
+        <input type="range" id="seats" min="100" max="10000" step="100" value="1000">
+        <div class="marks"><span>100</span><span>5k</span><span>10k</span></div>
+      </div>
+      <div class="ctrl">
+        <label>Active users <span class="val" id="vActive">40%</span></label>
         <input type="range" id="active" min="10" max="80" step="1" value="40">
-        <div class="hint">Share of licensed seats that are actually active. Enterprise SaaS averages ~50%; student-heavy bases run lower.</div>
-      </div>
-      <div class="ctrl">
-        <label>Price per seat / month <span class="val" id="vPrice">€20</span></label>
-        <input type="range" id="price" min="3" max="50" step="1" value="20">
-        <div class="hint">Copilot Business $19 · Enterprise $39 · Tabnine (self-host) $39. Sovereignty + managed compliance supports the upper half.</div>
+        <div class="hint">Share of licensed seats that actually use it monthly. Enterprise tools average ~50%.</div>
       </div>
     </div>
 
     <div class="panel">
-      <h3>Workload</h3>
-      <div class="ph">How heavy an active user is. Agentic coding is input-dominated (~90%).</div>
+      <h3>Platform — resale + margin</h3>
+      <div class="ph">You buy tokens wholesale, sell access at a markup. Margin is built in.</div>
       <div class="ctrl">
-        <label>Tokens per active user / month <span class="val" id="vTok">80M</span></label>
-        <input type="range" id="tok" min="20" max="450" step="5" value="80">
-        <div class="marks"><span>light 27M</span><span>typical 135M</span><span>heavy 450M</span></div>
+        <label>Platform price / seat / year <span class="val" id="vPrice">€240</span></label>
+        <input type="range" id="price" min="60" max="600" step="10" value="240">
+        <div class="hint" id="priceMo">≈ €20 / seat / month. Copilot Business ≈ $19/mo, Enterprise $39/mo.</div>
+      </div>
+      <div class="ctrl">
+        <label>Token cost / active user / month <span class="val" id="vCost">€30</span></label>
+        <input type="range" id="cost" min="5" max="100" step="1" value="30">
+        <div class="hint">Your wholesale cost, after routing ~70% to a cheap model + ~80% prompt-caching. Heavy users capped by fair-use so this stays bounded.</div>
       </div>
     </div>
 
     <div class="panel">
-      <h3>Delivery &amp; inference cost</h3>
-      <div class="ph">The model compares both ways and uses whichever is cheaper at your scale.</div>
+      <h3>Services — training &amp; customization</h3>
+      <div class="ph">High-margin labor. Often the real reason they buy.</div>
       <div class="ctrl">
-        <label>Route to cheap small model <span class="val" id="vRoute">70%</span></label>
-        <input type="range" id="route" min="0" max="90" step="5" value="70">
-        <div class="hint">Easy requests → GLM-Air-class. RouteLLM-style routing cuts blended cost; coding skews heavier, so ~70% is the defensible default.</div>
+        <label>Services revenue / customer / year <span class="val" id="vServ">€25k</span></label>
+        <input type="range" id="serv" min="0" max="120" step="5" value="25">
+        <div class="hint">Onboarding, training, custom skills/integrations, the DPO/compliance package. One-time + recurring.</div>
       </div>
-      <div class="ctrl">
-        <label>Prompt-cache hit rate <span class="val" id="vCache">80%</span></label>
-        <input type="range" id="cache" min="0" max="95" step="5" value="80">
-        <div class="hint">Agentic tools re-send context; cached input bills at ~0.19× (Z.ai). Dominant lever on resale cost.</div>
-      </div>
-      <details class="adv">
-        <summary>Advanced: prices, node &amp; throughput</summary>
-        <div class="grid2">
-          <div class="mini"><label>Frontier in €/1M</label><input id="pInF" type="number" value="1.29" step="0.01"></div>
-          <div class="mini"><label>Frontier out €/1M</label><input id="pOutF" type="number" value="4.05" step="0.01"></div>
-          <div class="mini"><label>Cheap in €/1M</label><input id="pInC" type="number" value="0.12" step="0.01"></div>
-          <div class="mini"><label>Cheap out €/1M</label><input id="pOutC" type="number" value="0.78" step="0.01"></div>
-          <div class="mini"><label>Cache multiplier</label><input id="cacheMul" type="number" value="0.19" step="0.01"></div>
-          <div class="mini"><label>Output token share</label><input id="outShare" type="number" value="0.10" step="0.01"></div>
-          <div class="mini"><label>Node €/month (8×H200)</label><input id="nodeCost" type="number" value="13800" step="100"></div>
-          <div class="mini"><label>Decode tok/s/node</label><input id="nodeTps" type="number" value="8000" step="500"></div>
-          <div class="mini"><label>Node utilization</label><input id="nodeUtil" type="number" value="0.65" step="0.05"></div>
-          <div class="mini"><label>Batch backfill offset</label><input id="batch" type="number" value="0.25" step="0.05"></div>
-        </div>
-      </details>
     </div>
 
     <div class="panel">
-      <h3>Fixed costs</h3>
-      <div class="ph">The real cost of a managed service is the people who run it.</div>
+      <h3>Your cost base</h3>
+      <div class="ph">Keep it lean — this is the whole point.</div>
       <div class="ctrl">
-        <label>Team headcount <span class="val" id="vTeam">3</span></label>
-        <input type="range" id="team" min="1" max="8" step="1" value="3">
-        <div class="hint">Pilot ≈ 1 named MLOps owner. A 24/7 SLA needs ~3–5 (infra + on-call rotation + part-time security/support).</div>
-      </div>
-      <div class="ctrl">
-        <label>Loaded cost per engineer / year <span class="val" id="vSal">€145k</span></label>
-        <input type="range" id="sal" min="90" max="200" step="5" value="145">
-        <div class="hint">NL senior MLOps/SRE, fully loaded (salary ×1.4–1.55 for employer costs).</div>
-      </div>
-      <div class="ctrl">
-        <label>Compliance &amp; certs / year <span class="val" id="vComp">€23k</span></label>
-        <input type="range" id="comp" min="0" max="80" step="1" value="23">
-        <div class="hint">ISO 27001 surveillance + annual pen test. One-time setup (~€55k) not modelled here.</div>
+        <label>Annual operating cost <span class="val" id="vOp">€300k</span></label>
+        <input type="range" id="op" min="100" max="1000" step="25" value="300">
+        <div class="hint">The team that runs the gateway + delivers services. ~2 people to start (NL loaded ≈ €145k each).</div>
       </div>
     </div>
   </div>
 
-  <!-- RESULTS -->
   <div class="results">
     <div class="hero-num" id="hero">
-      <div class="lbl">Net margin (at scale)</div>
+      <div class="lbl">Net margin</div>
       <div class="big" id="netMargin">—</div>
       <div class="sub" id="netSub">—</div>
     </div>
     <div class="rows">
-      <div class="row"><span class="k">Revenue / month</span><span class="v" id="rev">—</span></div>
-      <div class="row sub"><span class="k">Active users</span><span class="v" id="activeUsers">—</span></div>
-      <div class="row"><span class="k">Inference COGS / month <span id="modePick" class="pick">—</span></span><span class="v" id="cogs">—</span></div>
-      <div class="row sub"><span class="k">↳ if resale gateway</span><span class="v" id="cogsResale">—</span></div>
-      <div class="row sub"><span class="k">↳ if self-host nodes</span><span class="v" id="cogsSelf">—</span></div>
+      <div class="row"><span class="k">Total revenue / year</span><span class="v" id="rev">—</span></div>
+      <div class="row sub"><span class="k">↳ platform (seats)</span><span class="v" id="revP">—</span></div>
+      <div class="row sub"><span class="k">↳ services</span><span class="v" id="revS">—</span></div>
+      <div class="row"><span class="k">Token cost / year</span><span class="v" id="cogs">—</span></div>
       <div class="row"><span class="k">Gross profit</span><span class="v" id="gross">—</span></div>
       <div class="row sub"><span class="k">Gross margin</span><span class="v" id="grossM">—</span></div>
-      <div class="row"><span class="k">Fixed opex / month</span><span class="v" id="opex">—</span></div>
-      <div class="row tot"><span class="k">Net profit / month</span><span class="v" id="net">—</span></div>
+      <div class="row"><span class="k">Operating cost / year</span><span class="v" id="opx">—</span></div>
+      <div class="row tot"><span class="k">Net profit / year</span><span class="v" id="net">—</span></div>
+      <div class="row sub"><span class="k">Net per customer</span><span class="v" id="perInst">—</span></div>
     </div>
     <div class="callout" id="callout">—</div>
   </div>
@@ -221,123 +176,91 @@
 <div class="wrap notes">
   <h2>Assumptions &amp; sources</h2>
   <details open>
-    <summary>Headline research-grounded defaults</summary>
+    <summary>Why it's shaped this way</summary>
     <table>
-      <tr><td>Token burn — light / typical / heavy <span class="flag firm">FIRM</span></td><td>27M / 135M / 450M tokens per active user / month; ~90:10 input:output. <a href="https://www.morphllm.com/ai-coding-costs">morphllm</a>, <a href="https://martinalderson.com/posts/no-it-doesnt-cost-anthropic-5k-per-claude-code-user/">Alderson</a></td></tr>
-      <tr><td>Self-host blended cost <span class="flag est">EST</span></td><td>~€3.2/1M (≈$3.50) at 50–80% util; the binding constraint is <b>output</b> throughput — input is near-free (prefill + KV reuse). <a href="https://www.spheron.network/blog/gpu-cost-per-token-benchmark-llm-inference-2026/">Spheron</a></td></tr>
-      <tr><td>GLM 5.2 resale price <span class="flag firm">FIRM</span></td><td>Z.ai $1.40 in / $0.26 cached / $4.40 out; OpenRouter $0.95/$3.00. <a href="https://openrouter.ai/z-ai/glm-5.2">OpenRouter</a>, <a href="https://docs.z.ai/guides/overview/pricing">Z.ai</a></td></tr>
-      <tr><td>Cheap model (routing target) <span class="flag firm">FIRM</span></td><td>GLM-4.5-Air $0.13 / $0.85. <a href="https://openrouter.ai/z-ai/glm-4.5-air">OpenRouter</a></td></tr>
-      <tr><td>Node throughput <span class="flag firm">FIRM</span></td><td>GLM-5 FP8 on 8×H200, SGLang: 1,215 out tok/s @ concurrency 100; up to ~17,600 wide-EP. Default 8,000. <a href="https://vllm.ai/blog/2025-12-17-large-scale-serving">vLLM</a></td></tr>
-      <tr><td>Node cost <span class="flag firm">FIRM</span></td><td>8×H200 ≈ $14–17k/mo reserved (≈€13.8k), ~$23k on-demand. <a href="https://getdeploying.com/gpus/nvidia-h200">getdeploying</a></td></tr>
-      <tr><td>Model routing <span class="flag firm">FIRM</span></td><td>RouteLLM: ~85% cost cut at 95% quality; production ~70% to cheap tier; coding skews heavier. <a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM</a></td></tr>
-      <tr><td>Seat-license utilization <span class="flag firm">FIRM</span></td><td>~47–54% of SaaS seats active; provisioned ≈ ~2× monthly-active. <a href="https://zylo.com/blog/saas-statistics">Zylo</a></td></tr>
-      <tr><td>EU engineer loaded cost <span class="flag est">EST</span></td><td>NL senior MLOps/SRE ~€100k gross × 1.4–1.55 ≈ €140–155k loaded. <a href="https://www.payscale.com/research/NL/Job=Site_Reliability_Engineer_(SRE)/Salary">PayScale</a></td></tr>
-      <tr><td>Margin class <span class="flag firm">FIRM</span></td><td>GPU-inference business ≠ SaaS; hybrid MSP/AI band: gross 50–60%, net 15–25%. <a href="https://www.meetgradient.com/resources/gross-margin-gross-profit-the-msp-playbook-for-better-business-health">Gradient</a>, <a href="https://www.macrotrends.net/stocks/charts/GTLB/gitlab/profit-margins">GitLab</a></td></tr>
-      <tr><td>Pricing comps <span class="flag firm">FIRM</span></td><td>Copilot $19/$39, Cursor $20/$40, Tabnine $39. <a href="https://github.com/features/copilot/plans">GitHub</a>, <a href="https://cursor.com/pricing">Cursor</a></td></tr>
-      <tr><td>Batch backfill <span class="flag firm">FIRM</span></td><td>Batch API = 50% discount; nights/weekends recover idle fixed cost. <a href="https://platform.claude.com/docs/en/about-claude/pricing">Anthropic</a></td></tr>
+      <tr><td>Resale, not self-host <span class="flag est">EST</span></td><td>Below ~1,000 active seats, reselling a per-token EU gateway beats owning a GPU node — no fixed iron to fill. Self-hosting only wins later, at volume.</td></tr>
+      <tr><td>Markup removes heavy-user risk <span class="flag firm">FIRM</span></td><td>Flat per-seat pricing for agentic coding is being squeezed — Copilot moved to usage-based billing in 2026. Charging cost + margin (with fair-use caps) keeps every user profitable. <a href="https://github.blog/news-insights/company-news/github-copilot-is-moving-to-usage-based-billing/">GitHub</a></td></tr>
+      <tr><td>Token cost / active user <span class="flag est">EST</span></td><td>Typical agentic user ≈ 135M tok/mo; after ~70% routing to a cheap model + ~80% prompt-cache, effective wholesale lands ≈ €15–40/mo. <a href="https://www.morphllm.com/ai-coding-costs">morphllm</a>, <a href="https://www.lmsys.org/blog/2024-07-01-routellm/">RouteLLM</a></td></tr>
+      <tr><td>Seat pricing comps <span class="flag firm">FIRM</span></td><td>Copilot $19/$39, Cursor $20/$40, Tabnine (self-host) $39. Sovereignty + compliance supports the upper half. <a href="https://github.com/features/copilot/plans">GitHub</a>, <a href="https://www.tabnine.com/pricing/">Tabnine</a></td></tr>
+      <tr><td>Seat utilization <span class="flag firm">FIRM</span></td><td>~47–54% of enterprise SaaS seats are actively used. <a href="https://zylo.com/blog/saas-statistics">Zylo</a></td></tr>
+      <tr><td>Margin class <span class="flag firm">FIRM</span></td><td>This is a managed-services / AI-app hybrid: net 15–25% at scale, not SaaS 80%. Services lift the blend. <a href="https://www.meetgradient.com/resources/gross-margin-gross-profit-the-msp-playbook-for-better-business-health">Gradient (MSP)</a></td></tr>
+      <tr><td>Team cost <span class="flag est">EST</span></td><td>NL senior MLOps/SRE ≈ €145k loaded. Two people run the gateway + deliver services to start. <a href="https://www.payscale.com/research/NL/Job=Site_Reliability_Engineer_(SRE)/Salary">PayScale</a></td></tr>
     </table>
   </details>
   <details>
     <summary>How the math works</summary>
     <table>
-      <tr><td>Active users</td><td>provisioned seats × active %</td></tr>
-      <tr><td>Resale COGS</td><td>per user: input tokens × (cache-adjusted, routing-blended in-price) + output tokens × routing-blended out-price; × active users</td></tr>
-      <tr><td>Self-host COGS</td><td>size by <b>output</b> tokens; cheap-routed fraction uses ~0.2× GPU; nodes = ⌈effective output ÷ node capacity⌉; × node cost; minus batch backfill offset. Whole nodes only — small scale pays for a full node.</td></tr>
-      <tr><td>Chosen COGS</td><td>min(resale, self-host) — the crossover is where owning a node beats reselling</td></tr>
-      <tr><td>Net</td><td>revenue − chosen COGS − (team × loaded ÷ 12) − compliance ÷ 12</td></tr>
+      <tr><td>Platform revenue</td><td>customers × seats × price/seat/yr</td></tr>
+      <tr><td>Services revenue</td><td>customers × services/customer/yr</td></tr>
+      <tr><td>Token cost</td><td>customers × seats × active% × token-cost/active-user/mo × 12</td></tr>
+      <tr><td>Net</td><td>(platform + services) − token cost − operating cost</td></tr>
     </table>
-    <p class="disc">A deliberately transparent model, not a guarantee. The softest knobs — node throughput, utilization, active ratio, and tokens/user — swing the result most; instrument them in a real pilot before trusting any single output. One-time costs (ISO setup ~€55k, build engineering, sales) and ramp are excluded. USD figures converted at ~0.92.</p>
+    <p class="disc">Deliberately simple. Excludes one-time setup (ISO 27001 ~€55k, build), sales ramp, and assumes services are delivered by the same team inside operating cost. The softest knob is token-cost-per-active-user — it depends on routing, caching and how heavy your users are; instrument it in a real pilot. Indicative, June 2026.</p>
   </details>
 </div>
 
-<footer><div class="wrap">Polder — unit economics · figures indicative, June 2026 · <a href="index.html">overview</a></div></footer>
+<footer><div class="wrap">Polder — business model · figures indicative, June 2026 · <a href="index.html">overview</a></div></footer>
 
 <script>
 const $=id=>document.getElementById(id);
-const eur=n=>'€'+Math.round(n).toLocaleString('en-US');
-const eurK=n=>Math.abs(n)>=1000?'€'+(n/1000).toFixed(n>=10000?0:1)+'k':eur(n);
-const SECMO=2592000; // seconds/month
+const eur=n=>(n<0?'–€':'€')+Math.abs(Math.round(n)).toLocaleString('en-US');
+const eurK=n=>{const a=Math.abs(n);const s=n<0?'–':'';return a>=1e6?s+'€'+(a/1e6).toFixed(2)+'M':a>=1000?s+'€'+(a/1000).toFixed(0)+'k':eur(n);};
 
 function calc(){
-  const seats=+$('seats').value, active=+$('active').value/100, price=+$('price').value;
-  const tokM=+$('tok').value;            // millions of tokens / active user / month
-  const route=+$('route').value/100, cache=+$('cache').value/100;
-  const pInF=+$('pInF').value, pOutF=+$('pOutF').value, pInC=+$('pInC').value, pOutC=+$('pOutC').value;
-  const cacheMul=+$('cacheMul').value, outShare=+$('outShare').value;
-  const nodeCost=+$('nodeCost').value, nodeTps=+$('nodeTps').value, nodeUtil=+$('nodeUtil').value, batch=+$('batch').value;
-  const team=+$('team').value, sal=+$('sal').value*1000, comp=+$('comp').value*1000;
+  const inst=+$('inst').value, seats=+$('seats').value, active=+$('active').value/100;
+  const price=+$('price').value, cost=+$('cost').value, serv=+$('serv').value*1000, op=+$('op').value*1000;
 
-  // labels
+  $('vInst').textContent=inst;
   $('vSeats').textContent=seats.toLocaleString('en-US');
   $('vActive').textContent=Math.round(active*100)+'%';
   $('vPrice').textContent='€'+price;
-  $('vTok').textContent=tokM+'M';
-  $('vRoute').textContent=Math.round(route*100)+'%';
-  $('vCache').textContent=Math.round(cache*100)+'%';
-  $('vTeam').textContent=team;
-  $('vSal').textContent='€'+(sal/1000)+'k';
-  $('vComp').textContent='€'+(comp/1000)+'k';
+  $('priceMo').textContent='≈ €'+(price/12).toFixed(0)+' / seat / month. Copilot Business ≈ $19/mo, Enterprise $39/mo.';
+  $('vCost').textContent='€'+cost;
+  $('vServ').textContent='€'+(serv/1000)+'k';
+  $('vOp').textContent='€'+(op/1000)+'k';
 
-  const activeUsers=seats*active;
-  const inM=tokM*(1-outShare), outM=tokM*outShare; // millions per user/month
+  const totalSeats=inst*seats;
+  const activeUsers=totalSeats*active;
+  const revP=totalSeats*price;
+  const revS=inst*serv;
+  const rev=revP+revS;
+  const cogs=activeUsers*cost*12;
+  const gross=rev-cogs;
+  const grossM=rev>0?gross/rev:0;
+  const net=gross-op;
+  const netM=rev>0?net/rev:0;
+  const perInst=inst>0?net/inst:0;
 
-  // ---- RESALE COGS (€/active user/month) ----
-  const cacheFac=(1-cache)+cache*cacheMul;            // effective input price factor
-  const inPriceBlend=(route*pInC+(1-route)*pInF)*cacheFac;
-  const outPriceBlend=route*pOutC+(1-route)*pOutF;
-  const cogsResalePerUser=inM*inPriceBlend+outM*outPriceBlend;
-  const cogsResale=cogsResalePerUser*activeUsers;
-
-  // ---- SELF-HOST COGS (capacity by OUTPUT tokens) ----
-  const totalOutM=outM*activeUsers;                   // millions of output tokens/month
-  const effOutM=totalOutM*((1-route)+route*0.2);      // cheap model ~5× cheaper GPU-time
-  const nodeCapM=nodeTps*SECMO*nodeUtil/1e6;          // millions output tok / node / month
-  const nodesNeeded=Math.max(1,Math.ceil(effOutM/nodeCapM));
-  const cogsSelf=nodesNeeded*nodeCost*(1-batch);
-
-  // choose cheaper
-  const selfWins=cogsSelf<cogsResale;
-  const cogs=Math.min(cogsResale,cogsSelf);
-
-  const revenue=seats*price;
-  const gross=revenue-cogs;
-  const grossM=revenue>0?gross/revenue:0;
-  const opex=team*sal/12+comp/12;
-  const net=gross-opex;
-  const netM=revenue>0?net/revenue:0;
-
-  // render
-  $('rev').textContent=eur(revenue);
-  $('activeUsers').textContent=Math.round(activeUsers).toLocaleString('en-US');
+  $('rev').textContent=eur(rev);
+  $('revP').textContent=eur(revP);
+  $('revS').textContent=eur(revS);
   $('cogs').textContent=eur(cogs);
-  $('cogsResale').textContent=eur(cogsResale);
-  $('cogsSelf').textContent=eur(cogsSelf)+' ('+nodesNeeded+' node'+(nodesNeeded>1?'s':'')+')';
-  $('modePick').textContent=selfWins?'self-host':'resale';
-  $('gross').textContent=eur(gross);
-  $('gross').className='v '+(gross>=0?'pos':'negc');
+  $('gross').textContent=eur(gross);$('gross').className='v '+(gross>=0?'pos':'negc');
   $('grossM').textContent=Math.round(grossM*100)+'%';
-  $('opex').textContent=eur(opex);
-  $('net').textContent=eur(net);
-  $('net').className='v '+(net>=0?'pos':'negc');
-  $('netMargin').textContent=(net>=0?'':'–')+Math.abs(Math.round(netM*100))+'%';
-  $('netSub').textContent=eurK(net)+'/mo · '+eurK(net*12)+'/yr';
+  $('opx').textContent=eur(op);
+  $('net').textContent=eur(net);$('net').className='v '+(net>=0?'pos':'negc');
+  $('perInst').textContent=eur(perInst);
+  $('netMargin').textContent=(net<0?'–':'')+Math.abs(Math.round(netM*100))+'%';
+  $('netSub').textContent=eurK(net)+'/yr net · '+eur(price-(active*cost*12)>0?0:0)||'';
+  $('netSub').textContent=eurK(net)+' / year';
   $('hero').className='hero-num'+(net<0?' neg':'');
 
-  // breakeven seats (hold all ratios; revenue/seat vs cogs/seat + fixed)
-  // net=0 => seats*price - cogsPerSeat*seats - opex =0 ; cogsPerSeat from chosen mode at current scale
-  const cogsPerSeat=seats>0?cogs/seats:0;
-  const contrib=price-cogsPerSeat;
-  const beSeats=contrib>0?Math.ceil(opex/contrib):null;
+  // breakeven customers: net=0 => inst*(seats*price + serv - seats*active*cost*12) = op
+  const perCustGross=seats*price+serv-seats*active*cost*12;
+  const beInst=perCustGross>0?Math.ceil(op/perCustGross):null;
 
   let msg;
+  const seatMarginYr=price-active*cost*12/1; // not per seat exactly; compute contribution per seat
+  const tokenPerSeatYr=active*cost*12;
   if(net>=0){
-    msg='<b>Profitable</b> at '+seats.toLocaleString()+' seats — '+(selfWins?'owning '+nodesNeeded+' node'+(nodesNeeded>1?'s':''):'reselling a gateway')+' is cheaper here. Net '+eurK(net)+'/mo. ';
-    msg+=beSeats?('Break-even was ~'+beSeats.toLocaleString()+' seats.'):'';
+    msg='<b>Profitable</b> at '+inst+' customer'+(inst>1?'s':'')+' — '+eurK(net)+'/yr net ('+Math.round(netM*100)+'% margin), about '+eur(perInst)+' per customer. ';
+    msg+='Platform contributes '+eurK(revP-cogs)+', services '+eurK(revS)+' gross.';
   } else {
-    msg='<b>Underwater</b> — fixed opex ('+eurK(opex)+'/mo for '+team+' staff) outweighs gross profit ('+eurK(gross)+'). ';
-    msg+=beSeats?('You need ~<b>'+beSeats.toLocaleString()+' seats</b> at these settings to break even.'):'Gross margin is negative — raise price or cut COGS first.';
+    msg='<b>Below break-even.</b> ';
+    if(price<tokenPerSeatYr){msg+='Each seat costs more in tokens ('+eur(tokenPerSeatYr)+'/yr) than it earns ('+eur(price)+') — raise price, add a fair-use cap, or lower token cost via routing.';}
+    else if(beInst){msg+='You need ~<b>'+beInst+' customers</b> at these settings to cover the '+eurK(op)+' operating cost.';}
+    else{msg+='Gross is negative — fix per-seat economics first.';}
   }
-  if(selfWins) msg+=' Self-host beats resale once a node fills.'; else msg+=' Below the crossover, reselling avoids paying for a half-idle node.';
   $('callout').innerHTML=msg;
 }
 document.querySelectorAll('input').forEach(el=>el.addEventListener('input',calc));
