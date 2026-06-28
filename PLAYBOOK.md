@@ -69,10 +69,12 @@ partner.
 ### Hiring sequence (triggered by milestone, not calendar)
 
 1. **Product/UX designer** — trigger: sponsor secured, pilot scheduled. *Highest-
-   leverage hire; the differentiator is experience, not capability.*
-2. **Desktop/integration engineer** — trigger: pilot demand or first paid contract.
-   Owns the Tauri/GitLab/Scaleway glue that survives 30 students. *Slips later only
-   if Emma can harden it herself — see Open Question 2.*
+   leverage hire, and now unambiguously first: Emma + Claude Code can carry the
+   build, but neither founder is a dedicated experience owner — and experience is
+   the whole differentiator.*
+2. **Desktop/integration engineer** — trigger: pilot scale exceeds what Emma + Claude
+   Code can maintain, or first paid contract. Owns the Tauri/GitLab/Scaleway glue.
+   *Deferred — Emma hardens the pilot herself with Claude Code (see resolved Q2).*
 3. **Fractional Dutch tech lawyer** (retainer) — trigger: **now.**
 4. **BD / institutional partnerships** — trigger: second institution in pipeline.
 5. **Infra/security, DPO** — trigger: moving past non-confidential data, or an
@@ -187,8 +189,9 @@ conversation open — positioned to stay non-dilutive or raise from strength.
 
 1. **Can the TU Delft AI initiative host a pilot or co-apply for a grant** — does it
    have budget / cohorts / faculty backing, or is it just Emma's affiliation?
-2. **How strong is Emma's engineering** — can she harden the pilot herself, or is the
-   integration engineer the actual first hire alongside the designer?
+2. ~~How strong is Emma's engineering~~ — **RESOLVED:** Emma is capable with Claude
+   Code and can harden the pilot herself. Integration engineer deferred; product/UX
+   designer is the first hire.
 3. **Funding fork** — lead non-dilutive (grants + lighthouse revenue) or pursue an
    equity raise soon? (Recommendation: non-dilutive first.)
 4. **Arvind's role** — confirm whether he's available as *our* counsel or only as
