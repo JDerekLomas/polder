@@ -26,14 +26,20 @@
 | 2 | Agent core loop produces working output | ✅ built, verified with live inference |
 | 3 | Real login works (GitLab OAuth live) | 🟢 **wired** — auto-push verified end-to-end on gitlab.com (create-repo + `oauth2:token` push smoke-tested OK; PAT seeded so the app shows connected now). **OAuth "Log in with GitLab" registered** (App ID + secret in secret-lover, injected via `.secrets.json`; `connect_gitlab` now sends the secret so confidential *or* public apps work; redirect `http://127.0.0.1:4272/oauth/callback`). Remaining: one live run to confirm the button flow end-to-end |
 | 4 | Invisible save / versioning works | ✅ built (local verified) |
-| 5 | Publish yields a real **public** URL | 🟡 local/LAN done; ⛔ **gap** = public EU URL (Scaleway) |
+| 5 | Publish yields a real **public** URL | 🟢 **done** — Scaleway Object Storage bucket `polder-publish` (fr-par) created with static website hosting; app's `publish_to_eu` wired to it (creds fall back to the Scaleway keys). End-to-end `s3 sync → public URL` smoke-tested HTTP 200 at `https://polder-publish.s3-website.fr-par.scw.cloud/<slug>/`. Same French vendor as inference = one DPA |
 | 6 | The EU-infra claim is **true, not aspirational** (EU-host guarantee verified) | 🟢 **provider switched to Scaleway Generative APIs (FR)** — default model **GLM 5.2** (EU-hosted on Scaleway's Paris region), **Devstral 2** (fully EU-provenance coding model) available as an option. Removes the router-opacity problem; Scaleway publishes a standard GDPR DPA and is *also* the publish host (one vendor, one DPA). Note: GLM is Chinese-origin open weights — EU-*hosted* so the data path is sovereign, but a procurement story needing zero non-EU provenance can flip the default to Devstral. Remaining: sign the Scaleway DPA. EUrouter kept as documented alternative |
 | 7 | Legal minimum to lawfully onboard a student (Privacy Policy + ToS + AI notice) | 🟡 **v0 drafts done** (`legal/`) — pending Dutch counsel review + placeholders (entity, KvK, retention) |
 
-## The gap is exactly four things
+## The gap is exactly four things — status (updated 2026-06-28)
 
 3 (live GitLab login), 5 (public publish URL), 6 (GLM verification), 7 (v0 legal). **None
 is "design"** — all four are arrangement + verification. Close them and Polder is at the
+starting line.
+
+**Now:** #3 🟢 wired (OAuth registered + push verified), #5 🟢 done (Scaleway bucket live,
+publish verified), #6 🟢 on Scaleway/GLM (pending DPA signature), #7 🟡 drafts done
+(pending lawyer). What's left is **two signatures** (Scaleway DPA, lawyer on `legal/`) and
+**one live app run** to confirm the loop on-screen — not engineering. Effectively at the
 starting line.
 
 ## Then: human-centered design begins
