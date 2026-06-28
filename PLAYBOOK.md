@@ -66,19 +66,27 @@ cold outreach to a warm intro. The AI initiative is a potential combined
 **pilot host + grant co-applicant + credibility stamp** — treat it as a first-class
 partner.
 
-### Hiring sequence (triggered by milestone, not calendar)
+### The v0 team is complete
 
-1. **Product/UX designer** — trigger: sponsor secured, pilot scheduled. *Highest-
-   leverage hire, and now unambiguously first: Emma + Claude Code can carry the
-   build, but neither founder is a dedicated experience owner — and experience is
-   the whole differentiator.*
+**Derek + Emma cover everything v0 needs to build:** product/UX is the founders;
+AI/engineering is Emma + Claude Code. **Headcount is not the v0 constraint —
+arrangement (sponsor, OAuth app, bucket, lawyer) and founder focus are.** The only
+outside party needed before a pilot is the fractional lawyer.
+
+### Hiring sequence (all post-pilot, triggered by milestone not calendar)
+
+1. **Fractional Dutch tech lawyer** (retainer) — trigger: **now.** The one outside
+   party needed pre-pilot.
 2. **Desktop/integration engineer** — trigger: pilot scale exceeds what Emma + Claude
    Code can maintain, or first paid contract. Owns the Tauri/GitLab/Scaleway glue.
-   *Deferred — Emma hardens the pilot herself with Claude Code (see resolved Q2).*
-3. **Fractional Dutch tech lawyer** (retainer) — trigger: **now.**
-4. **BD / institutional partnerships** — trigger: second institution in pipeline.
-5. **Infra/security, DPO** — trigger: moving past non-confidential data, or an
+3. **BD / institutional partnerships** — trigger: second institution in pipeline;
+   when expansion outgrows Derek doing it personally.
+4. **Infra/security, DPO** — trigger: moving past non-confidential data, or an
    institution's security review demands it.
+
+> No product/UX or build hire is gated in front of the pilot. Don't add headcount to
+> do what the two founders already cover — spend the runway on arrangement and the
+> pilot instead.
 
 ---
 
