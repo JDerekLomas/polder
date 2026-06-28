@@ -1,4 +1,4 @@
-# Polder
+# MakeMode
 
 **The sovereign coding agent for European research & education.**
 
@@ -12,7 +12,7 @@ Marketing concept: https://polder.vercel.app
 
 ## Plan
 - [#1](../../issues/1) — v0 institutional fork (SURFconext SSO, audit logging, no-telemetry, guardrails)
-- [#2](../../issues/2) — Polder Gateway: be our own EU inference endpoint
+- [#2](../../issues/2) — MakeMode Gateway: be our own EU inference endpoint
 
 > Early-stage concept. GLM, GPT-NL, SURF and TU Delft are referenced as relevant models/infrastructure/institutions, not as endorsements or partners.
 

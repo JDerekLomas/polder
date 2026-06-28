@@ -1,4 +1,4 @@
-# Polder — Table Stakes (Phase 0 Definition of Done)
+# MakeMode — Table Stakes (Phase 0 Definition of Done)
 
 > The operating principle: **get to table stakes, then do human-centered design from real
 > student needs.** Table stakes is the price of entry — definable from the desk, not a
@@ -33,7 +33,7 @@
 ## The gap is exactly four things — status (updated 2026-06-28)
 
 3 (live GitLab login), 5 (public publish URL), 6 (GLM verification), 7 (v0 legal). **None
-is "design"** — all four are arrangement + verification. Close them and Polder is at the
+is "design"** — all four are arrangement + verification. Close them and MakeMode is at the
 starting line.
 
 **Now:** #3 🟢 wired (OAuth registered + push verified), #5 🟢 done (Scaleway bucket live,

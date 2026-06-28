@@ -12,7 +12,7 @@
 
 Hello EUrouter team,
 
-I'm building **Polder**, a coding-agent desktop app for European universities that runs
+I'm building **MakeMode**, a coding-agent desktop app for European universities that runs
 on EUrouter — our pilot routes the `glm-5.2` model through `api.eurouter.ai`. Our first
 deployment is with design students at **TU Delft**, and because we sell into public
 institutions, EU data residency and a signed DPA are hard requirements for us, not
@@ -65,7 +65,7 @@ This is for a live pilot, so a quick turnaround would be a big help — even par
 while the DPA is prepared. Thank you,
 
 [Derek Lomas]
-[Polder — title]
+[MakeMode — title]
 [email] · [phone]
 
 ---

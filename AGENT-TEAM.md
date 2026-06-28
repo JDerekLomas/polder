@@ -1,4 +1,4 @@
-# Polder — Agent Team Plan
+# MakeMode — Agent Team Plan
 
 > How two founders execute a multi-workstream venture: not by hiring, but by running a
 > fleet of specialized AI agents with founders as supervisors. The agent team **is** the

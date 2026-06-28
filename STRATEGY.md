@@ -1,9 +1,9 @@
-# Polder — Strategy & Timeline
+# MakeMode — Strategy & Timeline
 
 > The winning logic and the phased arc. Sits above `PLAYBOOK.md` (how) and the workstream
 > docs. Dates anchored to June 2026.
 
-## The thesis — how Polder wins
+## The thesis — how MakeMode wins
 
 1. **Start where there's no wall.** The beachhead — non-coding TU Delft design students —
    is underserved (no GUI agent built for them), their data is **non-confidential** (no

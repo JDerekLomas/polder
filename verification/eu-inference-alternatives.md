@@ -1,13 +1,13 @@
-# EU-Sovereign Inference Alternatives for Polder
+# EU-Sovereign Inference Alternatives for MakeMode
 
-> Companion to `glm-sovereignty.md`. Maps the realistic options for Polder's inference
+> Companion to `glm-sovereignty.md`. Maps the realistic options for MakeMode's inference
 > layer so the EUrouter/GLM dependency is a *choice*, not a single point of failure.
 > The app points opencode at an **OpenAI-compatible** endpoint
 > (`@ai-sdk/openai-compatible`, base URL `https://api.eurouter.ai/api/v1` in
 > `polder-app/src-tauri/src/lib.rs`), so **switching providers = changing a base URL +
 > model id + key.** That makes nearly every option below a low-effort swap.
 > Verified = read from the provider's own page; Claimed = vendor marketing not yet
-> contractually bound to Polder. Date: 2026-06-28.
+> contractually bound to MakeMode. Date: 2026-06-28.
 
 ---
 
@@ -55,7 +55,7 @@ failover spill outside the named set?) flagged in glm-sovereignty.md.
 | **Eden AI** | **FR** | Broad (incl. Mistral); coding via routed models | EU endpoint + EU residency options, DPA | Yes | Yes | Aggregator markup | Broad AI coverage, less a pure-sovereign play. |
 | **Cortecs** | EU-positioned | Open models incl. GLM-class (Tensorix is on Cortecs) | "Sovereign enterprise" positioning | Yes | Yes | — | Enterprise/sovereign framing; smaller. |
 
-→ **Verdict on routers:** only worth it for multi-model breadth. For Polder's single-model
+→ **Verdict on routers:** only worth it for multi-model breadth. For MakeMode's single-model
 coding-agent need, a **direct EU host is cleaner** (one named processor, no failover
 opacity). If we keep a router, EUrouter (native-EU NL entity) beats Requesty (AWS/Frankfurt,
 unclear entity) on the sovereignty story.

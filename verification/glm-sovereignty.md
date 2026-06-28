@@ -1,6 +1,6 @@
 # GLM / EUrouter Sovereignty Verification
 
-> Scout report — verifies the inference-layer sovereignty claim that the whole Polder
+> Scout report — verifies the inference-layer sovereignty claim that the whole MakeMode
 > value proposition rests on (see `STRATEGY.md` dominant risk + `DATA-FLOW.md` step 2).
 > Method: read the shipped app config (ground truth) + public web sources for EUrouter
 > and its GLM upstreams. Date: 2026-06-28.
@@ -9,7 +9,7 @@
 > ASPIRATIONAL** — the configured path points at a real Netherlands-registered EU
 > gateway (EUrouter B.V.) that publishes EU-residency, zero-retention, no-training terms
 > and routes GLM-5.2 only to two EU-hosted upstreams (Tensorix/IE, Regolo/IT); but none
-> of it is yet contractually bound to Polder, the "no data ever leaves the EU" guarantee
+> of it is yet contractually bound to MakeMode, the "no data ever leaves the EU" guarantee
 > has one unresolved tension (privacy policy allows EEA-exit under SCCs) and one
 > unconfirmed link (whether the GLM weights run on the upstreams' own EU GPUs vs. proxy
 > to a non-EU origin). It becomes TRUE only after the DPA below is signed.
@@ -34,7 +34,7 @@ On first run the shipped build writes this opencode engine config:
 **GLM-5.2 via EUrouter**. The code is ground truth; the README is stale. This matters
 because the sovereignty story is currently being carried by EUrouter/GLM, not Mistral.
 
-So the entity Polder is trusting is **EUrouter**, and behind it, whoever EUrouter routes
+So the entity MakeMode is trusting is **EUrouter**, and behind it, whoever EUrouter routes
 GLM-5.2 to.
 
 ---
@@ -82,7 +82,7 @@ verifiable; the *guarantees* are vendor-stated, see §3–4.
 
 - Zero-retention and no-training are **vendor self-assertions** (EUrouter ToS + Tensorix
   + Regolo marketing). Credible and consistent across three parties, but not audited,
-  not certified to us, and not yet contractually owed **to Polder**.
+  not certified to us, and not yet contractually owed **to MakeMode**.
 - "All processing exclusively within the EU/EEA" (ToS) is asserted but not evidenced with
   a region-pinning mechanism we've inspected.
 - Tensorix's "ephemeral enclaves, wiped instantly" and Regolo's "architectural" retention
@@ -97,7 +97,7 @@ verifiable; the *guarantees* are vendor-stated, see §3–4.
    EU upstreams under all conditions (load, outage, failover). If failover can spill to a
    non-listed provider, the guarantee leaks. The baked pilot key's routing settings
    (country/EEA whitelist, retention window, training opt-out) are configurable per-key —
-   **we have not verified how Polder's pilot key is configured.**
+   **we have not verified how MakeMode's pilot key is configured.**
 2. **The GLM origin-proxy question (the Chinese-provenance concern).** Neither Tensorix's
    nor Regolo's public page *explicitly rules out* backend proxying to a non-EU origin
    (e.g. Z.ai's API in China) for GLM specifically. The Z.ai↔Tensorix partnership tweet
@@ -111,11 +111,11 @@ verifiable; the *guarantees* are vendor-stated, see §3–4.
 4. **Sub-processor chain past the upstream.** Regolo's GPUs are operated by **Seeweb**;
    Tensorix uses unnamed Dublin/Helsinki DC operators. The full sub-processor list under
    EUrouter (and each upstream's own sub-processors) is not public to us.
-5. **Whether EUrouter B.V. will actually sign a DPA with Polder** on these terms (the ToS
+5. **Whether EUrouter B.V. will actually sign a DPA with MakeMode** on these terms (the ToS
    says a DPA exists for business customers — getting *our* signed copy is the open item).
 6. **Key architecture.** A budget-capped baked key is fine for a pilot but is not a
    sovereignty control; the planned server-side proxy (per the code comment + DATA-FLOW)
-   is what would let Polder *enforce* region/retention rather than *trust* it.
+   is what would let MakeMode *enforce* region/retention rather than *trust* it.
 
 ---
 
@@ -124,7 +124,7 @@ verifiable; the *guarantees* are vendor-stated, see §3–4.
 - 🟡 **It's a router, not a host.** Sovereignty via a routing layer is only as strong as
   the routing policy. Without a contractual region-pin + failover-pin for GLM-5.2, "EU
   hosted" is a default, not a guarantee. (Mitigated by EUrouter's per-key country/EEA
-  whitelist — but only if Polder's key is set that way; **unverified**.)
+  whitelist — but only if MakeMode's key is set that way; **unverified**.)
 - 🟡 **EEA-exit-under-SCCs clause** in the privacy policy directly undercuts the "nothing
   leaves the EU" line unless we confirm it can't touch prompt/code content.
 - 🟡 **GLM origin-proxy not explicitly excluded.** The single biggest substantive risk to
@@ -133,7 +133,7 @@ verifiable; the *guarantees* are vendor-stated, see §3–4.
   to a non-EU endpoint, including Z.ai.
 - 🟢 **Not a red flag, but note:** AWS Bedrock and Microsoft Foundry appear in EUrouter's
   *overall* provider list (US-HQ companies, EU deployments). They are **not** among the
-  two GLM-5.2 upstreams, so they don't touch Polder's default path — but they confirm the
+  two GLM-5.2 upstreams, so they don't touch MakeMode's default path — but they confirm the
   router *can* route to US-controlled entities, reinforcing the need for a hard per-key pin.
 - 🟢 **Baked API key** is a security/cost issue (extractable, the code says so), not a
   sovereignty issue per se. Ship it budget-capped + rotatable; replace with the proxy.
@@ -194,7 +194,7 @@ Contract & operations
 
 **ASPIRATIONAL (currently), with a credible path to TRUE.** The configured endpoint is a
 real, Netherlands-registered EU gateway whose published terms and GLM-5.2 routing (two
-EU upstreams, IE + IT) *support* every clause of Polder's sovereignty line — no US vendor
+EU upstreams, IE + IT) *support* every clause of MakeMode's sovereignty line — no US vendor
 on the default path, EU hosting, stated zero-retention/no-training, EU-only processing.
 But today it rests on **vendor self-assertions and default settings, not a signed DPA**,
 and three items must be closed in writing before the line can ship as a guarantee:

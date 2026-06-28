@@ -1,4 +1,4 @@
-# Polder — Data Flow & Sub-Processor Map
+# MakeMode — Data Flow & Sub-Processor Map
 
 > Input for: our counsel, the three DPAs, TU Delft's DPIA, and the grant's
 > sovereignty section. Companion to `PLAYBOOK.md` §5 (Legal).
@@ -23,7 +23,7 @@
 |---|---|---|
 | **Student** | Data subject | The person making projects |
 | **TU Delft** | Controller | Decides the tool is used, owns the relationship to the student |
-| **Polder** | Processor (for TU Delft) | Operates the tool on TU Delft's behalf |
+| **MakeMode** | Processor (for TU Delft) | Operates the tool on TU Delft's behalf |
 | **EUrouter / GLM host** | Sub-processor | Runs inference on prompts/code |
 | **Scaleway (fr-par)** | Sub-processor | Hosts published projects + stored project data |
 | **GitLab (gitlab.tudelft.nl)** | TU Delft infra | Code host; *TU Delft's own system*, not our sub-processor |
@@ -66,9 +66,9 @@ STUDENT
 
 ## The three DPAs this map produces
 
-1. **TU Delft ⇄ Polder** (we are processor). Their DPA; lists our sub-processors
+1. **TU Delft ⇄ MakeMode** (we are processor). Their DPA; lists our sub-processors
    (EUrouter/GLM, Scaleway, SURF). Gated by everything below being true.
-2. **Polder ⇄ EUrouter/GLM host** (sub-processor). **The critical one.** Must
+2. **MakeMode ⇄ EUrouter/GLM host** (sub-processor). **The critical one.** Must
    contractually guarantee:
    - ⚠️ Inference runs on **EU-located** infrastructure (which country, which entity).
    - ⚠️ **No retention** of prompts/code beyond the request.
@@ -76,7 +76,7 @@ STUDENT
    - ⚠️ **No onward transfer** outside the EU (the GLM provenance concern — model
      weights being Chinese-origin is fine *if the hosting and data path are EU and
      contractually sealed*; confirm the data never reaches a non-EU endpoint).
-3. **Polder ⇄ Scaleway** (sub-processor). Scaleway publishes a standard GDPR DPA;
+3. **MakeMode ⇄ Scaleway** (sub-processor). Scaleway publishes a standard GDPR DPA;
    confirm fr-par region pinning + retention/deletion terms.
 
 ## The honest sovereignty line (for the pitch & the grant)

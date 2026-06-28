@@ -1,26 +1,26 @@
 > ⚠️ **DRAFT — NOT LEGAL ADVICE.** Prepared by an AI assistant for review by qualified Dutch/EU counsel before any use. Do not publish as-is.
 
-# Polder — Privacy Policy
+# MakeMode — Privacy Policy
 
 **Version:** v0 draft · **Last updated:** [DATE]
 
-This Privacy Policy explains what personal data Polder processes when you use the Polder application, why, on what legal basis, who else may handle it, and the rights you have. It is written for students and other users of the app.
+This Privacy Policy explains what personal data MakeMode processes when you use the MakeMode application, why, on what legal basis, who else may handle it, and the rights you have. It is written for students and other users of the app.
 
-> **Plain-language summary (not a substitute for the policy below):** When you use Polder, you log in with your institution's GitLab account, and the things you type to the AI assistant — along with the code and context it needs — are sent to an EU-hosted AI model to generate responses. Your project files live on your own machine and on your institution's GitLab. If you publish a project, the built result is stored on EU-based object storage and given a public web address. Your institution, not Polder, decides that the tool is used and is the party legally responsible for your data; Polder operates the tool on the institution's behalf.
+> **Plain-language summary (not a substitute for the policy below):** When you use MakeMode, you log in with your institution's GitLab account, and the things you type to the AI assistant — along with the code and context it needs — are sent to an EU-hosted AI model to generate responses. Your project files live on your own machine and on your institution's GitLab. If you publish a project, the built result is stored on EU-based object storage and given a public web address. Your institution, not MakeMode, decides that the tool is used and is the party legally responsible for your data; MakeMode operates the tool on the institution's behalf.
 
 ---
 
 ## 1. Who is responsible for your data (controller and processor)
 
-Polder is offered to you through your educational institution.
+MakeMode is offered to you through your educational institution.
 
 - **[TU Delft / your institution]** is the **data controller**. It decides that the tool is used in your course or programme and is the party that holds the primary relationship with you. Questions about *why* your data is processed in connection with your studies should be directed to the institution.
-- **[POLDER LEGAL ENTITY NAME, e.g. Polder B.V.]** ("Polder", "we", "us") is the **data processor**. We operate the application on the institution's behalf and only process your data according to the institution's instructions and our agreement with them (a Data Processing Agreement, or "DPA").
+- **[MAKEMODE LEGAL ENTITY NAME, e.g. MakeMode B.V.]** ("MakeMode", "we", "us") is the **data processor**. We operate the application on the institution's behalf and only process your data according to the institution's instructions and our agreement with them (a Data Processing Agreement, or "DPA").
 
-> 🔖 **For counsel:** This controller/processor split assumes the TU Delft ⇄ Polder DPA is in place and that the institution is the controller for all processing described here. Confirm whether any processing (e.g. Polder's own product telemetry or service-improvement activity) makes Polder an independent controller for that limited purpose, and adjust this section accordingly.
+> 🔖 **For counsel:** This controller/processor split assumes the TU Delft ⇄ MakeMode DPA is in place and that the institution is the controller for all processing described here. Confirm whether any processing (e.g. MakeMode's own product telemetry or service-improvement activity) makes MakeMode an independent controller for that limited purpose, and adjust this section accordingly.
 
-**Polder's details:**
-- Legal entity: [POLDER LEGAL ENTITY NAME]
+**MakeMode's details:**
+- Legal entity: [MAKEMODE LEGAL ENTITY NAME]
 - Registered address: [REGISTERED ADDRESS]
 - Chamber of Commerce (KvK) number: [KVK NUMBER]
 - Contact for privacy questions: [PRIVACY/DPO CONTACT EMAIL]
@@ -60,9 +60,9 @@ We do **not** intentionally collect special categories of personal data (e.g. da
 
 ## 4. How your data flows (and the AI model hop)
 
-When you use Polder, data moves like this:
+When you use MakeMode, data moves like this:
 
-1. **Log in.** You authenticate via **GitLab OAuth on your institution's own GitLab instance** (`[gitlab.tudelft.nl]`). This returns an identity token. GitLab here is your institution's own infrastructure, not a Polder sub-processor — that data stays within the institution.
+1. **Log in.** You authenticate via **GitLab OAuth on your institution's own GitLab instance** (`[gitlab.tudelft.nl]`). This returns an identity token. GitLab here is your institution's own infrastructure, not a MakeMode sub-processor — that data stays within the institution.
 
 2. **Use the AI assistant ("Make").** When you prompt the assistant, your prompt together with the relevant code and project context is **sent off your device to an EU-hosted AI model provider** (the inference host) so that a response can be generated. **This is the key point to understand: the text and code you send to the assistant leave your machine and are processed by the AI model provider in order to produce a response.**
 
@@ -72,7 +72,7 @@ When you use Polder, data moves like this:
 
 5. **Publish ("Share").** If you choose to publish, the built output is stored on **EU-based object storage (Scaleway, Paris region "fr-par")** and made available at a public web address. Anything you publish becomes publicly accessible to anyone with the link.
 
-> **On data location:** Polder is designed so that processing takes place on **EU-based infrastructure**, and we aim to keep student data within the EU. We describe this as our **design intent and operating goal**. We are **not, at this stage, asserting a contractual guarantee** about the AI model provider's data residency, retention or training practices; those terms are being established in our agreements with the relevant providers. This policy will be updated to state any such guarantees only once they are contractually in place.
+> **On data location:** MakeMode is designed so that processing takes place on **EU-based infrastructure**, and we aim to keep student data within the EU. We describe this as our **design intent and operating goal**. We are **not, at this stage, asserting a contractual guarantee** about the AI model provider's data residency, retention or training practices; those terms are being established in our agreements with the relevant providers. This policy will be updated to state any such guarantees only once they are contractually in place.
 
 > 🔖 **For counsel:** This deliberately avoids asserting unverified "EU-only / no-retention / no-training / no-EU-exit" guarantees about the GLM inference host, which are not yet contractually confirmed (see DATA-FLOW.md). Once the GLM-host DPA is signed, this section and Section 6 should be tightened to state the confirmed guarantees. If the inference host is **outside the EEA** or any onward transfer occurs, an international transfer assessment and a transfer mechanism (e.g. SCCs) are required before launch.
 
@@ -80,7 +80,7 @@ When you use Polder, data moves like this:
 
 ## 5. Who else processes your data (sub-processors)
 
-Polder uses the following sub-processors to deliver the service. Each operates under a data processing agreement with Polder:
+MakeMode uses the following sub-processors to deliver the service. Each operates under a data processing agreement with MakeMode:
 
 | Sub-processor | Role | Location / region |
 |---|---|---|
@@ -88,7 +88,7 @@ Polder uses the following sub-processors to deliver the service. Each operates u
 | **Scaleway** | Object storage for published projects | France (Paris, "fr-par" region) |
 | **SURF (SURFconext)** | Identity provider — **planned for a later phase**, not active at v0 | Netherlands |
 
-> Your institution's **GitLab** instance is the institution's own infrastructure and is **not** a Polder sub-processor.
+> Your institution's **GitLab** instance is the institution's own infrastructure and is **not** a MakeMode sub-processor.
 
 We maintain an up-to-date sub-processor list and will notify the controller of changes in accordance with our DPA.
 
@@ -98,12 +98,12 @@ We maintain an up-to-date sub-processor list and will notify the controller of c
 
 ## 6. How long we keep your data (retention)
 
-> 🔖 **For counsel — retention periods must be set in/aligned with the TU Delft DPA and Polder's retention policy. The values below are placeholders.**
+> 🔖 **For counsel — retention periods must be set in/aligned with the TU Delft DPA and MakeMode's retention policy. The values below are placeholders.**
 
 | Data | Retention | 
 |---|---|
 | Identity / authentication tokens | [e.g. for the duration of your session / account; tokens expire after [PERIOD] — TBC] |
-| Prompts and AI context sent to the model | **Intended:** processed for the request and not retained by Polder beyond what is needed to return a response. **The AI model provider's retention is governed by the provider's terms and is [to be confirmed in the GLM-host DPA].** |
+| Prompts and AI context sent to the model | **Intended:** processed for the request and not retained by MakeMode beyond what is needed to return a response. **The AI model provider's retention is governed by the provider's terms and is [to be confirmed in the GLM-host DPA].** |
 | Project files | Stored on your device and your institution's GitLab; retention governed by your institution |
 | Published artifacts | Kept until you (or the institution) unpublish/delete them, or until [PERIOD] after account closure — TBC |
 | Operational logs | [RETENTION PERIOD — TBC] |
@@ -136,7 +136,7 @@ We apply technical and organisational measures appropriate to the risk to protec
 
 ## 9. Cookies and tracking
 
-The Polder desktop application [does not use advertising or third-party tracking cookies]. Authentication uses tokens needed to keep you logged in. [If the marketing website uses analytics, that is covered by a separate notice on that site.]
+The MakeMode desktop application [does not use advertising or third-party tracking cookies]. Authentication uses tokens needed to keep you logged in. [If the marketing website uses analytics, that is covered by a separate notice on that site.]
 
 > 🔖 **For counsel:** Confirm the actual cookie/token behaviour of the desktop app and whether any separate cookie notice is needed for the marketing site.
 
@@ -144,13 +144,13 @@ The Polder desktop application [does not use advertising or third-party tracking
 
 ## 10. Children
 
-Polder is intended for use by students at higher-education institutions and is not directed at children under [16].
+MakeMode is intended for use by students at higher-education institutions and is not directed at children under [16].
 
 ---
 
 ## 11. Data Protection Officer
 
-> 🔖 **For counsel:** Determine whether Polder is required to appoint a DPO under Art. 37 GDPR at this stage (the v0 pilot involves non-confidential design-student data). State the DPO contact here if appointed, or document the basis for not appointing one.
+> 🔖 **For counsel:** Determine whether MakeMode is required to appoint a DPO under Art. 37 GDPR at this stage (the v0 pilot involves non-confidential design-student data). State the DPO contact here if appointed, or document the basis for not appointing one.
 
 ---
 
@@ -161,5 +161,5 @@ We may update this policy. Material changes will be communicated through the app
 ## 13. Contact
 
 For any privacy question, contact:
-**[POLDER LEGAL ENTITY NAME]** — [PRIVACY/DPO CONTACT EMAIL] — [REGISTERED ADDRESS]
+**[MAKEMODE LEGAL ENTITY NAME]** — [PRIVACY/DPO CONTACT EMAIL] — [REGISTERED ADDRESS]
 Or your institution's data protection contact: [INSTITUTION DPO CONTACT].

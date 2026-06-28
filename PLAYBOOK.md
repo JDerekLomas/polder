@@ -1,4 +1,4 @@
-# Polder — Execution Playbook
+# MakeMode — Execution Playbook
 
 > The canonical "how we actually build and ship this" doc for Derek + Emma.
 > Living document — update as milestones land. For the product/status overview see
@@ -14,7 +14,7 @@ Everything below is whatever makes that sentence true and defensible.
 
 ## The business shape (read this first)
 
-Polder is a **two-sided motion, not a classic SaaS sale.** Students adopt it for
+MakeMode is a **two-sided motion, not a classic SaaS sale.** Students adopt it for
 free and spread it by sharing live links; the **institution pays** for the managed
 workspace. Early on, "sales" and "fundraising" are the same activity: landing
 TU Delft as a lighthouse customer is simultaneously the proof, the revenue, and the
@@ -129,9 +129,9 @@ trust-built mission.
 
 **DPA is three relationships, not one:**
 
-1. **Polder ⇄ TU Delft** — they are *controller*, we are *processor*; sign their DPA.
+1. **MakeMode ⇄ TU Delft** — they are *controller*, we are *processor*; sign their DPA.
    This gates the pilot contract.
-2. **Polder ⇄ each sub-processor** — DPA *from* **Scaleway, the EUrouter/GLM host,
+2. **MakeMode ⇄ each sub-processor** — DPA *from* **Scaleway, the EUrouter/GLM host,
    SURF.** The GLM DPA is the most important document we own — it's the written
    guarantee that prompts/code stay in the EU and aren't retained/trained on. The
    whole sovereignty claim is only as strong as this.
@@ -153,7 +153,7 @@ trust-built mission.
 - International transfer assessment (confirm no EU exit on GLM path; SCCs only if one)
 
 **Lower-cost, do early:**
-- Trademark (Polder/Terp); entity (Dutch BV); IP assignment from every contributor;
+- Trademark (MakeMode); entity (Dutch BV); IP assignment from every contributor;
   contractor NDAs
 - Accessibility statement (European Accessibility Act — education tools in scope)
 - Cookie/analytics notice on the marketing site

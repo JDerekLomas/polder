@@ -1,4 +1,4 @@
-# Polder — Grant Target List
+# MakeMode — Grant Target List
 
 > Non-dilutive funding map (Door 1 in `PLAYBOOK.md`). Owner: Emma (with the TU Delft
 > AI initiative as co-applicant where possible). Status verified June 2026 — re-check
@@ -9,7 +9,7 @@
 Open-source funders (NLnet, Sovereign Tech Fund) fund **open digital base technology**,
 not proprietary products. So frame applications around the **open-source EU
 provider/engine work on `opencode`** (the sovereign inference adapter, audit logging,
-no-telemetry fork) — *not* the Polder desktop product. The product wrapper is funded by
+no-telemetry fork) — *not* the MakeMode desktop product. The product wrapper is funded by
 customers + equity; the **sovereign infrastructure layer is grant-fundable.** Two
 different fundable artifacts.
 

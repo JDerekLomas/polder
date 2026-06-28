@@ -1,4 +1,4 @@
-# Polder — Legal, Policy & Certifications Checklist
+# MakeMode — Legal, Policy & Certifications Checklist
 
 > The full list. Owner: Derek + fractional Dutch tech lawyer. Companion to
 > `DATA-FLOW.md` (the sub-processor map) and `PLAYBOOK.md` §5.
@@ -17,10 +17,10 @@
 ## B. Data protection (GDPR)
 
 **The three DPAs** (detail in `DATA-FLOW.md`):
-- [ ] **[contract]** TU Delft ⇄ Polder DPA — we are *processor*; sign their paper
-- [ ] **[v0]** Polder ⇄ **EUrouter/GLM host** DPA — *the critical one*: EU-hosting,
+- [ ] **[contract]** TU Delft ⇄ MakeMode DPA — we are *processor*; sign their paper
+- [ ] **[v0]** MakeMode ⇄ **EUrouter/GLM host** DPA — *the critical one*: EU-hosting,
       no-retention, no-training, no-EU-exit. Whole sovereignty claim rests here
-- [ ] **[v0]** Polder ⇄ **Scaleway** DPA — confirm fr-par pinning + deletion SLA
+- [ ] **[v0]** MakeMode ⇄ **Scaleway** DPA — confirm fr-par pinning + deletion SLA
 - [ ] **[v0]** Public **sub-processor list**
 
 **Policies & registers:**
@@ -37,7 +37,7 @@
 
 ## C. EU AI Act
 
-- [ ] **[v0]** **Risk classification** — document that Polder is **limited-risk**
+- [ ] **[v0]** **Risk classification** — document that MakeMode is **limited-risk**
       (a prototype-building assistant), not high-risk
 - [ ] **[v0]** **AI transparency notice** — users must know output is AI-generated
 - [ ] **[v0]** Confirm **GPAI obligations sit with the model provider** (GLM host), not us;
@@ -90,7 +90,7 @@
 
 ## G. Brand & site
 
-- [ ] **[v0]** Trademark search + registration (Polder / Terp); secure domains
+- [ ] **[v0]** Trademark search + registration (MakeMode); secure domains
 - [ ] **[v0]** Cookie / analytics notice on the marketing site (if it tracks)
 
 ## Conflict flag — Arvind (TU Delft legal)
