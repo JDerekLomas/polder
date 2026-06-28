@@ -27,7 +27,7 @@
 | 3 | Real login works (GitLab OAuth live) | ⛔ **gap** — needs registered OAuth app |
 | 4 | Invisible save / versioning works | ✅ built (local verified) |
 | 5 | Publish yields a real **public** URL | 🟡 local/LAN done; ⛔ **gap** = public EU URL (Scaleway) |
-| 6 | The EU-infra claim is **true, not aspirational** (EU-host guarantee verified) | 🟢 **provider switched to Scaleway Generative APIs (FR)** — default model now **Devstral 2** (French-provenance coding model), GLM 5.2 optional, on Scaleway's Paris region. Removes the router-opacity problem AND the Chinese-provenance footnote; Scaleway publishes a standard GDPR DPA and is *also* the publish host (one vendor, one DPA). Remaining: sign the Scaleway DPA. EUrouter kept as documented alternative (`verification/glm-sovereignty.md`) |
+| 6 | The EU-infra claim is **true, not aspirational** (EU-host guarantee verified) | 🟢 **provider switched to Scaleway Generative APIs (FR)** — default model **GLM 5.2** (EU-hosted on Scaleway's Paris region), **Devstral 2** (fully EU-provenance coding model) available as an option. Removes the router-opacity problem; Scaleway publishes a standard GDPR DPA and is *also* the publish host (one vendor, one DPA). Note: GLM is Chinese-origin open weights — EU-*hosted* so the data path is sovereign, but a procurement story needing zero non-EU provenance can flip the default to Devstral. Remaining: sign the Scaleway DPA. EUrouter kept as documented alternative |
 | 7 | Legal minimum to lawfully onboard a student (Privacy Policy + ToS + AI notice) | 🟡 **v0 drafts done** (`legal/`) — pending Dutch counsel review + placeholders (entity, KvK, retention) |
 
 ## The gap is exactly four things
