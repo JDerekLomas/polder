@@ -27,7 +27,7 @@
 | 3 | Real login works (GitLab OAuth live) | ⛔ **gap** — needs registered OAuth app |
 | 4 | Invisible save / versioning works | ✅ built (local verified) |
 | 5 | Publish yields a real **public** URL | 🟡 local/LAN done; ⛔ **gap** = public EU URL (Scaleway) |
-| 6 | The EU-infra claim is **true, not aspirational** (GLM-host guarantee verified) | 🟡 **verified ASPIRATIONAL** (`verification/glm-sovereignty.md`) — endpoint is EUrouter B.V. (NL) routing to EU upstreams (Tensorix IE / Regolo IT), claims look right but rest on vendor self-assertion + defaults, not a signed DPA. 11 DPA questions ready. Closes when DPA signed |
+| 6 | The EU-infra claim is **true, not aspirational** (EU-host guarantee verified) | 🟢 **provider switched to Scaleway Generative APIs (FR)** — default model now **Devstral 2** (French-provenance coding model), GLM 5.2 optional, on Scaleway's Paris region. Removes the router-opacity problem AND the Chinese-provenance footnote; Scaleway publishes a standard GDPR DPA and is *also* the publish host (one vendor, one DPA). Remaining: sign the Scaleway DPA. EUrouter kept as documented alternative (`verification/glm-sovereignty.md`) |
 | 7 | Legal minimum to lawfully onboard a student (Privacy Policy + ToS + AI notice) | 🟡 **v0 drafts done** (`legal/`) — pending Dutch counsel review + placeholders (entity, KvK, retention) |
 
 ## The gap is exactly four things

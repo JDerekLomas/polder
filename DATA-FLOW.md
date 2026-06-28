@@ -4,6 +4,16 @@
 > sovereignty section. Companion to `PLAYBOOK.md` §5 (Legal).
 > **Status: first-pass. Items marked ⚠️ CONFIRM are claims we assert but have not yet
 > verified contractually — these are exactly what the DPAs must pin down.**
+>
+> **DECISION (2026-06-28): inference moved to Scaleway Generative APIs (France).** The
+> app now defaults to **Devstral 2** (Mistral's French-provenance coding model) on
+> Scaleway's Paris region, with GLM 5.2 as an option. This **consolidates inference and
+> publishing onto one French EU vendor (Scaleway) under a single GDPR DPA**, removes the
+> EUrouter router-opacity problem, and drops the Chinese-provenance footnote from the
+> default path. Net effect on this map: the "EUrouter/GLM host" sub-processor below is
+> replaced by **Scaleway** for *both* inference and publishing. EUrouter is retained as a
+> documented alternative (`verification/eu-inference-alternatives.md`). Sub-processor DPA
+> to sign: **Scaleway** (standard, published).
 
 ## Who's who under GDPR
 
