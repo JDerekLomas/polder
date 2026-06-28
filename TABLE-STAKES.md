@@ -27,8 +27,8 @@
 | 3 | Real login works (GitLab OAuth live) | ⛔ **gap** — needs registered OAuth app |
 | 4 | Invisible save / versioning works | ✅ built (local verified) |
 | 5 | Publish yields a real **public** URL | 🟡 local/LAN done; ⛔ **gap** = public EU URL (Scaleway) |
-| 6 | The EU-infra claim is **true, not aspirational** (GLM-host guarantee verified) | ⛔ **gap** — Scout must verify no-retention/no-training/no-EU-exit |
-| 7 | Legal minimum to lawfully onboard a student (Privacy Policy + ToS + AI notice) | ⛔ **gap** — Counsel-Draft produces v0 |
+| 6 | The EU-infra claim is **true, not aspirational** (GLM-host guarantee verified) | 🟡 **verified ASPIRATIONAL** (`verification/glm-sovereignty.md`) — endpoint is EUrouter B.V. (NL) routing to EU upstreams (Tensorix IE / Regolo IT), claims look right but rest on vendor self-assertion + defaults, not a signed DPA. 11 DPA questions ready. Closes when DPA signed |
+| 7 | Legal minimum to lawfully onboard a student (Privacy Policy + ToS + AI notice) | 🟡 **v0 drafts done** (`legal/`) — pending Dutch counsel review + placeholders (entity, KvK, retention) |
 
 ## The gap is exactly four things
 

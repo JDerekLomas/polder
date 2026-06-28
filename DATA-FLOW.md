@@ -78,8 +78,18 @@ the target, not a fact — don't put it on the site as a guarantee yet.
 
 ## Open confirmations (assign + close these)
 
-- [ ] EUrouter/GLM: hosting country, legal entity, retention policy, training policy,
-      data-residency clause. *(Highest priority — the whole claim rests here.)*
+> **Scout verification (see `verification/glm-sovereignty.md`):** app endpoint is
+> `https://api.eurouter.ai/api/v1`, model `eurouter/glm-5.2`. Operator = **EUrouter B.V.
+> (NL, KVK-registered)** — an EU, GDPR-bindable entity. EUrouter is a *router*, and
+> GLM-5.2's only two upstreams are EU-hosted (**Tensorix, Ireland** / **Regolo, Italy**),
+> both zero-retention. Published terms claim EU-only processing + zero retention + no
+> training. **But:** region is a routing *default* not a hard pin; the privacy policy
+> allows EEA-exit under SCCs; no explicit no-forward-to-non-EU-origin guarantee for GLM.
+> **Verdict: ASPIRATIONAL, credible path to TRUE — keep the ⚠️ markers until the DPA is
+> signed.** 11 specific DPA questions are listed in the verification file.
+
+- [~] EUrouter/GLM: hosting country, legal entity, retention policy, training policy,
+      data-residency clause. *Partially verified (above); closes on signed DPA.*
 - [ ] Scaleway: confirm fr-par pinning + DPA + deletion SLA.
 - [ ] Telemetry: verify CO₂/cost data is non-personal (no prompt content) so it stays
       out of scope.
