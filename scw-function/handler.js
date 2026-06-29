@@ -131,9 +131,13 @@ exports.handle = async (event) => {
       if (html.length > MAX_HTML) return json(413, { error: 'page too large to publish' }, cors);
       if (!S3_ACCESS_KEY || !S3_SECRET_KEY) return json(500, { error: 'server not configured' }, cors);
       const slug = slugify(b.name);
+      // Namespace by a per-browser owner key so re-publishing overwrites only your own page,
+      // others can't overwrite it, and paths aren't enumerable. No owner = legacy flat path.
+      const owner = /^[a-z0-9]{6,32}$/.test(String(b.owner || '')) ? String(b.owner) : '';
+      const prefix = owner ? owner + '/' + slug : slug;
       const s3 = new S3Client({ region: 'fr-par', endpoint: 'https://s3.fr-par.scw.cloud', credentials: { accessKeyId: S3_ACCESS_KEY, secretAccessKey: S3_SECRET_KEY } });
-      await s3.send(new PutObjectCommand({ Bucket: 'makemode-publish', Key: slug + '/index.html', Body: html, ContentType: 'text/html', ACL: 'public-read' }));
-      return json(200, { url: 'https://makemode-publish.s3-website.fr-par.scw.cloud/' + slug + '/' }, cors);
+      await s3.send(new PutObjectCommand({ Bucket: 'makemode-publish', Key: prefix + '/index.html', Body: html, ContentType: 'text/html', ACL: 'public-read' }));
+      return json(200, { url: 'https://makemode-publish.s3-website.fr-par.scw.cloud/' + prefix + '/' }, cors);
     }
     return json(400, { error: 'unknown action' }, cors);
   } catch (e) {
