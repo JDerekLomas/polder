@@ -1,7 +1,7 @@
 # MakeMode — User Journeys
 
 > The end-to-end story of a design student using MakeMode, mapped to the flows in
-> `UX-FLOWS.md` and the working prototype (`polder-app/shell-prototype.html`, viewable
+> `UX-FLOWS.md` and the working prototype (`makemode-app/shell-prototype.html`, viewable
 > in a browser). North stars: **Claude Cowork** (calm agentic surface for non-developers),
 > **Lovable** (make → live preview → publish), **Claude Code** (real system power = the moat).
 

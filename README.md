@@ -68,8 +68,8 @@ Start here, then go to the doc for the question you have:
 
 **Product & UX**
 - [UX-FLOWS.md](UX-FLOWS.md) — the core flows + the Claude/Lovable/Cowork north stars
-- `../polder-app/shell-prototype.html` — the working shell prototype (open in a browser)
-- `../polder-app/PROGRESS.md` — what the app does today
+- `../makemode-app/shell-prototype.html` — the working shell prototype (open in a browser)
+- `../makemode-app/PROGRESS.md` — what the app does today
 
 **Legal & sovereignty**
 - [LEGAL-COMPLIANCE.md](LEGAL-COMPLIANCE.md) — the full legal/policy/certifications checklist

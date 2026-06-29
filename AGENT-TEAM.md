@@ -4,7 +4,7 @@
 > fleet of specialized AI agents with founders as supervisors. The agent team **is** the
 > "recruits we'll add later" from the playbook — deployed now, reviewed by humans.
 > Companion to `PLAYBOOK.md`. Source of truth for each agent = the planning docs in this
-> repo + `polder-app/PROGRESS.md`.
+> repo + `makemode-app/PROGRESS.md`.
 
 ## The premise
 
@@ -42,7 +42,7 @@ Each agent: **mission · owns · tools · reads · produces · tier · superviso
 ### 1. Engine (build / integration)
 - **Mission:** wrap opencode, harden the Tauri shell, integrate GitLab + Scaleway, keep
   the two blocked features lit once keys exist.
-- **Owns:** `polder-app` codebase, builds, tests, the open-source EU adapter.
+- **Owns:** `makemode-app` codebase, builds, tests, the open-source EU adapter.
 - **Tools:** code, bash, git. **Reads:** `PROGRESS.md`, `DATA-FLOW.md`.
 - **Produces:** working features on branches + tests + PRs.
 - **Tier 1** on branches, **Tier 2** to merge. **Supervisor:** Emma.

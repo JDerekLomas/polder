@@ -18,18 +18,18 @@
 
 ## 1. What the app actually points to (ground truth from the code)
 
-Source of truth: `/Users/dereklomas/polder-app/src-tauri/src/lib.rs` (`seed_engine`, lines 75–115).
+Source of truth: `/Users/dereklomas/makemode-app/src-tauri/src/lib.rs` (`seed_engine`, lines 75–115).
 On first run the shipped build writes this opencode engine config:
 
 - **Provider id:** `eurouter`  (display name "EUrouter (EU-hosted)")
 - **Base URL / endpoint:** `https://api.eurouter.ai/api/v1`  (OpenAI-compatible, via `@ai-sdk/openai-compatible`)
 - **Default model:** `eurouter/glm-5.2`  (display "GLM 5.2 (EU)", 1M ctx / 131k out)
 - **Auth:** a **pilot EUrouter API key baked into the binary** at build time
-  (`POLDER_BAKED_KEY_OBFUS`, XOR-obfuscated — see lib.rs lines 137–157). The code's own
+  (`MAKEMODE_BAKED_KEY_OBFUS`, XOR-obfuscated — see lib.rs lines 137–157). The code's own
   comment admits this "blocks casual extraction, NOT a determined attacker — ship a
   budget-capped, rotatable key. The real fix is a server-side proxy."
 
-**Doc inconsistency to fix:** `polder-app/README.md` says the default provider is
+**Doc inconsistency to fix:** `makemode-app/README.md` says the default provider is
 **Mistral** with GLM as an opt-in. The actual shipped code + `PROGRESS.md` default to
 **GLM-5.2 via EUrouter**. The code is ground truth; the README is stale. This matters
 because the sovereignty story is currently being carried by EUrouter/GLM, not Mistral.
@@ -206,8 +206,8 @@ sovereignty line as a fact on the site.
 ---
 
 ### Sources
-- App config (ground truth): `/Users/dereklomas/polder-app/src-tauri/src/lib.rs`,
-  `polder-app/README.md`, `polder-app/PROGRESS.md`
+- App config (ground truth): `/Users/dereklomas/makemode-app/src-tauri/src/lib.rs`,
+  `makemode-app/README.md`, `makemode-app/PROGRESS.md`
 - https://www.eurouter.ai/privacy · https://www.eurouter.ai/terms ·
   https://www.eurouter.ai/providers · https://www.eurouter.ai/models ·
   https://www.eurouter.ai/models/glm-5.2 · https://www.eurouter.ai/providers/tensorix

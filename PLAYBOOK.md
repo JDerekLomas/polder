@@ -2,7 +2,7 @@
 
 > The canonical "how we actually build and ship this" doc for Derek + Emma.
 > Living document — update as milestones land. For the product/status overview see
-> `polder-app/PROGRESS.md`; for the concept and pitch see `index.html` / `pitch.html`.
+> `makemode-app/PROGRESS.md`; for the concept and pitch see `index.html` / `pitch.html`.
 
 ## The one sentence everything serves
 

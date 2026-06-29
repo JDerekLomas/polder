@@ -4,7 +4,7 @@
 > layer so the EUrouter/GLM dependency is a *choice*, not a single point of failure.
 > The app points opencode at an **OpenAI-compatible** endpoint
 > (`@ai-sdk/openai-compatible`, base URL `https://api.eurouter.ai/api/v1` in
-> `polder-app/src-tauri/src/lib.rs`), so **switching providers = changing a base URL +
+> `makemode-app/src-tauri/src/lib.rs`), so **switching providers = changing a base URL +
 > model id + key.** That makes nearly every option below a low-effort swap.
 > Verified = read from the provider's own page; Claimed = vendor marketing not yet
 > contractually bound to MakeMode. Date: 2026-06-28.
@@ -106,7 +106,7 @@ control), not the pilot path.
    direct host is the stronger sovereignty story.
 5. **Self-host (Scaleway/OVH/IONOS GPU):** Phase-3+ option at scale, not for the pilot.
 
-**Lowest-effort switch, concretely:** in `polder-app/src-tauri/src/lib.rs` `seed_engine`,
+**Lowest-effort switch, concretely:** in `makemode-app/src-tauri/src/lib.rs` `seed_engine`,
 the provider block's `baseURL` + the `"model"` id + the baked key are the only things that
 change. Everything else (opencode, the OpenAI-compatible SDK, the app shell) stays. A swap
 to Scaleway or Mistral is a one-file, few-line change.
