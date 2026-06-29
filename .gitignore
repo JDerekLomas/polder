@@ -1,3 +1,8 @@
 .vercel
 .*-issue*
 .DS_Store
+
+# scw-function build artifacts (deps bundled into the deploy zip, not tracked)
+scw-function/node_modules/
+scw-function/fn.zip
+scw-function/package-lock.json
