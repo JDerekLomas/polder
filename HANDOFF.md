@@ -17,7 +17,7 @@ North stars: Claude Cowork (calm agentic surface) + Lovable (make/preview/publis
 ## Repos
 - **github.com/JDerekLomas/makemode-app** — desktop Tauri app + Rust control server. Local: `~/makemode-app`
 - **github.com/JDerekLomas/makemode-site** — web app, Scaleway function, all docs, marketing. Local: `~/makemode-site`
-- (Old `polder-app`/`polder` names redirect.) Internal Rust crate is still named `polder-app` (kept to avoid build churn — invisible).
+- (Old `polder-app`/`polder` names redirect.) The Polder→MakeMode rename is now complete down to the Rust crate (`makemode-app`); the only `polder` left in the app is the `XK` XOR pad in `lib.rs`, kept deliberately (renaming it breaks baked-key decoding). "polder" in *this* site repo is the intentional sovereignty metaphor (the `.polder` texture + copy) — leave it.
 
 ## Architecture — everything on Scaleway/France = ONE DPA
 - **Inference:** Scaleway Generative APIs. Model picker on arrival: **Mistral (fast, default) / Devstral 2 / GLM 5.2.**
