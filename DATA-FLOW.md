@@ -107,3 +107,19 @@ the target, not a fact — don't put it on the site as a guarantee yet.
 - [ ] Telemetry: verify CO₂/cost data is non-personal (no prompt content) so it stays
       out of scope.
 - [ ] SURFconext: data shared at SP registration (later phase).
+
+## Future services & modalities (all kept on Scaleway = same DPA)
+
+The sovereignty model scales cleanly: each new capability is either already on Scaleway
+(same France hosting, **same single DPA — no new sub-processor**) or, if not, another
+EU-hosted provider (one more sub-processor DPA — same playbook as the inference DPA).
+
+- **Transactional email** (share/invite/"your site is live" emails) → **Scaleway
+  Transactional Email (TEM)** — the chosen provider. France-hosted, same vendor, same DPA.
+  (French alternatives if ever needed: Brevo, Mailjet. Avoid US: Resend/Postmark/SendGrid.)
+- **Vision / image understanding** → **Pixtral 12B** on Scaleway (same DPA) — already available.
+- **Speech-to-text** → **Whisper / Voxtral** on Scaleway (same DPA) — already available.
+- **Image *generation* (text→image)** → the one gap. Not on Scaleway today. Target: **FLUX**
+  (Black Forest Labs, German/EU-origin) on an EU host → one more sub-processor DPA.
+- **Hosting / compute / storage / secrets** → all Scaleway already (Object Storage,
+  Serverless Functions, Secret Manager — all fr-par).
