@@ -1,3 +1,6 @@
+// ⚠️ NON-SOVEREIGN: brochure/demo only. Runs on Vercel (US-jurisdiction infra), so it is
+// NOT in the student data path — real student traffic uses scw-function/ (Scaleway, fr-par).
+// Do not route authenticated student prompts/code through here. See issue #5.
 // MakeMode web — build/edit a page by streaming from Scaleway (France, EU).
 // Edge runtime, pinned to Frankfurt (fra1) so it stays in the EU and can stream
 // (no 10s serverless timeout). Streams the raw HTML content back to the browser.

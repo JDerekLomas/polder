@@ -1,3 +1,5 @@
+// ⚠️ NON-SOVEREIGN: brochure/demo only. Runs on Vercel (US-jurisdiction infra) — NOT the
+// student data path. Real publishing uses scw-function/ (Scaleway, fr-par). See issue #5.
 // MakeMode web — publish a generated page to Scaleway Object Storage (fr-par, EU).
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
