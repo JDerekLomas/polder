@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en" data-screen="onboard">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MakeMode</title>
+<style>
+  :root{
+    --cream:#f4efe6; --cream-50:#faf7f0; --cream-100:#fffdf8; --cream-200:#ece4d6;
+    --sand:#e3d9c6; --line:#d8cfc0; --ink:#1c1a17; --ink-2:#423d34; --muted:#6b6358;
+    --faint:#8a8275; --amber:#b5530f; --amber-bright:#d9851f; --amber-soft:#f3ba63;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Hoefler Text",Georgia,serif;
+    --sans:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+    --shadow:0 10px 40px rgba(40,30,15,.12);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .screen{display:none;height:100vh}
+  html[data-screen="onboard"] #onboard{display:flex}
+  html[data-screen="make"] #make{display:grid}
+  button{font-family:inherit;cursor:pointer}
+
+  /* ---------- top bar ---------- */
+  .bar{display:flex;align-items:center;justify-content:space-between;
+    padding:14px 22px;border-bottom:1px solid var(--line);background:var(--cream-50)}
+  .brand{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.02em}
+  .brand .dot{color:var(--amber)}
+  .bar-mid{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}
+  .bar-mid input{font:inherit;color:var(--ink);background:transparent;border:0;border-bottom:1px dashed var(--line);
+    text-align:center;padding:2px 4px;min-width:160px}
+  .bar-right{display:flex;align-items:center;gap:10px}
+  .ghost{background:transparent;border:1px solid var(--line);border-radius:9px;color:var(--muted);
+    padding:7px 11px;font-size:14px}
+  .ghost:hover{background:var(--cream-200);color:var(--ink)}
+  .publish-btn{background:var(--amber);border:0;color:#fff;border-radius:10px;font-weight:600;
+    padding:9px 18px;font-size:14px;box-shadow:0 2px 10px rgba(181,83,15,.28)}
+  .publish-btn:hover{background:var(--amber-bright)}
+
+  /* ---------- onboarding (#1) ---------- */
+  #onboard{flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:40px;
+    background:radial-gradient(120% 90% at 50% 0%,var(--cream-50),var(--cream))}
+  #onboard .wordmark{font-family:var(--serif);font-size:52px;letter-spacing:.04em;font-weight:600}
+  #onboard .ask{font-family:var(--serif);font-size:30px;color:var(--ink-2);margin:-6px 0 2px}
+  .composer{width:min(680px,92vw);background:var(--cream-100);border:1px solid var(--line);
+    border-radius:18px;box-shadow:var(--shadow);padding:16px 16px 12px}
+  .composer textarea{width:100%;border:0;outline:0;resize:none;background:transparent;
+    font:18px/1.5 var(--sans);color:var(--ink);min-height:64px}
+  .composer textarea::placeholder{color:var(--faint)}
+  .composer .row{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+  .composer .hint{color:var(--faint);font-size:12.5px}
+  .make-btn{background:var(--amber);border:0;color:#fff;border-radius:11px;font-weight:600;
+    padding:10px 20px;font-size:15px;display:flex;align-items:center;gap:8px}
+  .make-btn:hover{background:var(--amber-bright)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:680px}
+  .chip{background:var(--cream-100);border:1px solid var(--line);border-radius:999px;
+    padding:9px 16px;font-size:14px;color:var(--ink-2)}
+  .chip:hover{border-color:var(--amber-soft);color:var(--ink);background:#fff}
+  .eu{display:flex;align-items:center;gap:8px;color:var(--faint);font-size:13px;margin-top:6px}
+  .eu .pin{width:8px;height:8px;border-radius:50%;background:#3a8437;box-shadow:0 0 0 3px #3a843722}
+
+  /* ---------- make loop (#2) ---------- */
+  #make{grid-template-rows:auto 1fr;height:100vh}
+  .work{display:grid;grid-template-columns:minmax(340px,38%) 1fr;min-height:0}
+  /* chat */
+  .chat{display:flex;flex-direction:column;min-height:0;border-right:1px solid var(--line);background:var(--cream-50)}
+  .chat-scroll{flex:1;overflow:auto;padding:22px 20px;display:flex;flex-direction:column;gap:16px}
+  .msg{max-width:90%;font-size:14.5px;line-height:1.55}
+  .msg.user{align-self:flex-end;background:var(--amber);color:#fff;padding:10px 14px;border-radius:14px 14px 4px 14px}
+  .msg.ai{align-self:flex-start;color:var(--ink-2)}
+  .msg.ai .who{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:13px;margin-bottom:3px}
+  .building{align-self:flex-start;display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13.5px;
+    background:var(--cream-100);border:1px solid var(--line);border-radius:12px;padding:9px 13px}
+  .spin{width:13px;height:13px;border:2px solid var(--sand);border-top-color:var(--amber);border-radius:50%;
+    animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+  .pill{font-size:12px;color:var(--muted);background:var(--cream-200);border-radius:999px;padding:2px 9px}
+  .chat-input{border-top:1px solid var(--line);padding:12px 14px;background:var(--cream-50)}
+  .chat-input .box{display:flex;align-items:flex-end;gap:8px;background:var(--cream-100);
+    border:1px solid var(--line);border-radius:13px;padding:9px 10px 9px 14px}
+  .chat-input textarea{flex:1;border:0;outline:0;resize:none;background:transparent;font:14.5px/1.45 var(--sans);min-height:22px;color:var(--ink)}
+  .send{background:var(--amber);border:0;color:#fff;width:34px;height:34px;border-radius:9px;font-size:15px;flex:none}
+  /* preview */
+  .preview{display:flex;flex-direction:column;min-height:0;background:var(--cream-200)}
+  .pv-bar{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line);background:var(--cream-50)}
+  .pv-url{flex:1;display:flex;align-items:center;gap:8px;background:var(--cream-100);border:1px solid var(--line);
+    border-radius:9px;padding:6px 11px;color:var(--muted);font:12.5px var(--mono)}
+  .pv-tools{display:flex;gap:6px}
+  .pv-tools .ghost{padding:5px 9px;font-size:12.5px}
+  .pv-stage{flex:1;display:flex;align-items:center;justify-content:center;padding:18px;min-height:0}
+  .device{width:100%;height:100%;max-width:980px;background:#fff;border:1px solid var(--line);border-radius:12px;
+    box-shadow:var(--shadow);overflow:hidden}
+  .device iframe{width:100%;height:100%;border:0}
+  .costchip{position:fixed;right:24px;bottom:18px;background:rgba(250,247,240,.96);border:1px solid var(--line);
+    border-radius:12px;padding:8px 12px;font:12px var(--mono);color:var(--muted);box-shadow:var(--shadow);
+    display:flex;gap:12px;align-items:center;backdrop-filter:blur(6px)}
+  .costchip b{color:var(--ink);font-weight:600}
+  .costchip .pin{width:7px;height:7px;border-radius:50%;background:#3a8437;display:inline-block}
+
+  /* ---------- publish sheet (#5) ---------- */
+  .scrim{position:fixed;inset:0;background:rgba(28,26,23,.34);display:none;align-items:center;justify-content:center;z-index:50}
+  .scrim.open{display:flex}
+  .sheet{width:min(440px,92vw);background:var(--cream-100);border:1px solid var(--line);border-radius:20px;
+    box-shadow:0 24px 70px rgba(40,30,15,.3);padding:30px 28px;text-align:center;animation:pop .25s ease}
+  @keyframes pop{from{transform:translateY(10px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+  .sheet h2{font-family:var(--serif);font-size:26px;margin:6px 0 4px}
+  .sheet p{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .linkrow{display:flex;gap:8px;align-items:center;background:var(--cream-50);border:1px solid var(--line);
+    border-radius:11px;padding:10px 12px;margin-bottom:14px}
+  .linkrow input{flex:1;border:0;background:transparent;font:12.5px var(--mono);color:var(--ink-2);outline:0}
+  .linkrow button{background:var(--amber);color:#fff;border:0;border-radius:8px;padding:7px 12px;font-size:13px;font-weight:600}
+  .qr{width:118px;height:118px;margin:6px auto 16px;border-radius:12px;border:1px solid var(--line);
+    background:
+      repeating-linear-gradient(0deg,var(--ink) 0 6px,transparent 6px 12px),
+      repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 12px);
+    background-blend-mode:multiply;opacity:.82}
+  .sheet .acts{display:flex;gap:10px;justify-content:center}
+  .sheet .acts .ghost{padding:9px 14px}
+  .euline{color:var(--faint);font-size:12px;margin-top:14px;display:flex;gap:7px;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+
+<!-- ===== #1 ONBOARDING ===== -->
+<section id="onboard" class="screen">
+  <div class="wordmark">Make<span style="color:var(--amber)">Mode</span></div>
+  <div class="ask">What do you want to make?</div>
+  <div class="composer">
+    <textarea id="ob-input" placeholder="Describe it in your own words — “a one-page portfolio with my projects and a contact form”"></textarea>
+    <div class="row">
+      <span class="hint">⏎ to start · MakeMode builds it for you</span>
+      <button class="make-btn" onclick="startMake()">Make it →</button>
+    </div>
+  </div>
+  <div class="chips">
+    <button class="chip" onclick="seed(this)">A portfolio page</button>
+    <button class="chip" onclick="seed(this)">An interactive timeline</button>
+    <button class="chip" onclick="seed(this)">A quiz</button>
+    <button class="chip" onclick="seed(this)">A product landing page</button>
+    <button class="chip" onclick="seed(this)">A data visualisation</button>
+  </div>
+  <div class="eu"><span class="pin"></span> Runs on European infrastructure · nothing leaves the EU</div>
+</section>
+
+<!-- ===== #2 MAKE LOOP ===== -->
+<section id="make" class="screen">
+  <div class="bar">
+    <div class="brand">Make<span class="dot">Mode</span></div>
+    <div class="bar-mid">project · <input value="my-portfolio" /></div>
+    <div class="bar-right">
+      <button class="ghost" title="Light / dark">☀</button>
+      <button class="ghost" onclick="go('onboard')">History</button>
+      <button class="publish-btn" onclick="openSheet()">▶ Publish &amp; share</button>
+    </div>
+  </div>
+  <div class="work">
+    <!-- chat -->
+    <div class="chat">
+      <div class="chat-scroll" id="chat"></div>
+      <div class="chat-input">
+        <div class="box">
+          <textarea id="chat-text" placeholder="Describe a change… “make the header warmer and add an About section”"></textarea>
+          <button class="send" id="chat-send">↑</button>
+        </div>
+      </div>
+    </div>
+    <!-- preview -->
+    <div class="preview">
+      <div class="pv-bar">
+        <div class="pv-tools">
+          <button class="ghost">⟳</button>
+          <button class="ghost">🖥</button>
+          <button class="ghost">📱</button>
+        </div>
+        <div class="pv-url">⟢ live preview · my-portfolio</div>
+        <div class="pv-tools">
+          <button class="ghost">&lt;/&gt; code</button>
+          <button class="ghost">⤢ open</button>
+        </div>
+      </div>
+      <div class="pv-stage">
+        <div class="device">
+          <iframe srcdoc='<!doctype html><meta charset=utf-8><style>*{margin:0;font-family:Georgia,serif}body{background:#fbf8f2;color:#1c1a17}.hero{padding:64px 56px 36px}.hero h1{font-size:46px;letter-spacing:.02em}.hero p{color:#6b6358;font:16px system-ui;margin-top:10px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:18px 56px 40px}.card{background:#fff;border:1px solid #e7ddcc;border-radius:14px;height:140px;box-shadow:0 8px 24px rgba(0,0,0,.05)}.card b{display:block;font:600 15px system-ui;padding:16px}.card span{font:13px system-ui;color:#8a8275;padding:0 16px}h2{font:600 13px system-ui;letter-spacing:.14em;text-transform:uppercase;color:#b5530f;padding:0 56px}form{padding:14px 56px 60px;display:grid;gap:10px;max-width:420px}input,textarea{font:14px system-ui;padding:11px;border:1px solid #e7ddcc;border-radius:9px}button{font:600 14px system-ui;background:#b5530f;color:#fff;border:0;border-radius:9px;padding:11px}</style><div class=hero><h1>Iris van Dijk</h1><p>Industrial Design Engineering · TU Delft</p></div><h2>Selected work</h2><div class=grid><div class=card><b>Tactile Wayfinding</b><span>A signage system you can feel</span></div><div class=card><b>Solar Kettle</b><span>Off-grid water boiling</span></div><div class=card><b>Repair Café Kit</b><span>Tools for fixing together</span></div><div class=card><b>Quiet Hours</b><span>A calmer campus app</span></div></div><h2>Get in touch</h2><form><input placeholder="Your name"><input placeholder="Email"><textarea placeholder="Message" rows=3></textarea><button>Send</button></form>'></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="costchip"><span><span class="pin"></span> EU · France</span><span>€<b>0.004</b></span><span><b>0.02%</b> 🍔</span><span>GLM 5.2 · EU</span></div>
+</section>
+
+<!-- ===== #5 PUBLISH SHEET ===== -->
+<div class="scrim" id="scrim">
+  <div class="sheet">
+    <div style="font-size:30px">🎉</div>
+    <h2>Your project is live</h2>
+    <p>Anyone with the link can open it — hosted in France.</p>
+    <div class="qr"></div>
+    <div class="linkrow">
+      <input id="liveurl" readonly value="https://my-portfolio.makemode.nl" />
+      <button onclick="copyUrl()" id="copybtn">Copy</button>
+    </div>
+    <div class="acts">
+      <button class="ghost">Share to crit</button>
+      <button class="ghost" onclick="window.open('https://makemode.nl','_blank')">Open ⤢</button>
+      <button class="ghost" onclick="closeSheet()">Done</button>
+    </div>
+    <div class="euline"><span class="pin" style="width:7px;height:7px;border-radius:50%;background:#3a8437;display:inline-block"></span> Published on EU object storage — nothing left Europe</div>
+  </div>
+</div>
+
+<script>
+  var sessionId = null;
+  function go(s){document.documentElement.dataset.screen=s;window.scrollTo(0,0)}
+  function seed(node){document.getElementById('ob-input').value=node.textContent;document.getElementById('ob-input').focus()}
+  function openSheet(){document.getElementById('scrim').classList.add('open')}
+  function closeSheet(){document.getElementById('scrim').classList.remove('open')}
+  function copyUrl(){var b=document.getElementById('copybtn');try{navigator.clipboard.writeText(document.getElementById('liveurl').value)}catch(e){}b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy'},1400)}
+
+  function mk(cls,html){var d=document.createElement('div');d.className=cls;if(html!=null)d.innerHTML=html;return d}
+  function esc(s){return (s||'').replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+  function nl2br(s){return esc(s).replace(/\n/g,'<br>')}
+  function chatEl(){return document.getElementById('chat')}
+  function addUser(t){var c=chatEl();c.appendChild(mk('msg user',esc(t)));c.scrollTop=c.scrollHeight}
+  function addAI(t){var c=chatEl();c.appendChild(mk('msg ai','<div class="who">MakeMode</div>'+nl2br(t)));c.scrollTop=c.scrollHeight}
+  function addBuilding(){var c=chatEl();var b=mk('building','<span class="spin"></span> Building…');c.appendChild(b);c.scrollTop=c.scrollHeight;return b}
+
+  // Scripted demo (standalone — no backend). The real app drives the EU agent live.
+  var demoTurn=0;
+  function send(text){
+    if(!text||!text.trim())return;
+    addUser(text);
+    var b=addBuilding();
+    var first=demoTurn++===0;
+    setTimeout(function(){
+      b.remove();
+      if(first){
+        addAI("On it — I'll build a clean single-page version: a hero with your name, a projects grid, and a contact form. It's rendering on the right →");
+        setTimeout(function(){addAI("Done ✦ Want me to change the colours, add a section, or tweak the layout? When you're happy, hit Publish & share.")},1000);
+      } else {
+        addAI("Updated ✦ Take a look on the right — anything else you'd like to change?");
+      }
+    },1100);
+  }
+  function startMake(){
+    var t=(document.getElementById('ob-input').value||'').trim();
+    if(!t)t='A simple one-page site';
+    go('make'); chatEl().innerHTML=''; send(t);
+  }
+  function chatSend(){var ta=document.getElementById('chat-text');var t=ta.value;ta.value='';send(t)}
+
+  document.getElementById('ob-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();startMake()}});
+  (function(){
+    var s=document.getElementById('chat-send'); if(s)s.onclick=chatSend;
+    var ta=document.getElementById('chat-text'); if(ta)ta.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatSend()}});
+  })();
+</script>
+</body>
+</html>

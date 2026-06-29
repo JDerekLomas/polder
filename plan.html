@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>MakeMode — the plan</title>
+<style>
+  :root{
+    --cream:#f4efe6;--cream-50:#faf7f0;--cream-100:#fffdf8;--cream-200:#ece4d6;--sand:#e3d9c6;
+    --line:#d8cfc0;--ink:#1c1a17;--ink-2:#423d34;--muted:#6b6358;--faint:#8a8275;
+    --amber:#b5530f;--amber-bright:#d9851f;--green:#3a8437;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Hoefler Text",Georgia,serif;
+    --sans:-apple-system,system-ui,"Segoe UI",Roboto,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  a{color:var(--amber);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;color:var(--ink)}
+  .tag{font:600 11px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+  .pin{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 3px #3a843722;vertical-align:middle}
+
+  /* hero */
+  header{background:radial-gradient(120% 80% at 50% 0%,var(--cream-50),var(--cream));
+    border-bottom:1px solid var(--line);padding:62px 0 50px;text-align:center}
+  .mark{font-family:var(--serif);font-size:48px;letter-spacing:.04em;font-weight:600}
+  .mark span{color:var(--amber)}
+  .lede{font-family:var(--serif);font-size:23px;color:var(--ink-2);max-width:600px;margin:18px auto 0}
+  .meta{margin-top:20px;color:var(--faint);font:13px var(--mono)}
+  .meta b{color:var(--muted)}
+
+  section{padding:44px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:27px;margin:0 0 6px}
+  .sub{color:var(--muted);margin:0 0 22px}
+  p{margin:0 0 14px}
+  .lead{font-size:18px;color:var(--ink-2)}
+
+  /* status board */
+  .board{display:grid;gap:14px}
+  .card{background:var(--cream-100);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
+    box-shadow:0 6px 22px rgba(40,30,15,.05)}
+  .card h3{font-family:var(--sans);font-size:14px;font-weight:700;margin:0 0 8px;letter-spacing:.01em}
+  .card.ok h3{color:var(--green)} .card.work h3{color:var(--amber)} .card.next h3{color:var(--muted)}
+  .card ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:14.5px}
+  .card li{margin:3px 0}
+
+  /* loop diagram */
+  .loop{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:8px 0 4px}
+  .step{background:var(--cream-100);border:1px solid var(--line);border-radius:999px;padding:8px 16px;
+    font-size:14px;color:var(--ink-2)}
+  .step b{color:var(--ink)}
+  .arrow{color:var(--amber);align-self:center;font-weight:700}
+
+  /* phases */
+  .phase{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:12px 0;border-top:1px dashed var(--line)}
+  .phase:first-of-type{border-top:0}
+  .phase .when{font:600 12.5px var(--mono);color:var(--amber)}
+  .phase .what b{display:block;font-family:var(--serif);font-size:16px}
+  .phase .what span{color:var(--muted);font-size:14px}
+
+  /* two-up */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.two{grid-template-columns:1fr}.phase{grid-template-columns:1fr}}
+
+  .pill{display:inline-block;background:var(--cream-200);border-radius:999px;padding:3px 11px;
+    font-size:12.5px;color:var(--ink-2);margin:3px 4px 0 0}
+  .cta{display:inline-block;background:var(--amber);color:#fff;font-weight:600;border-radius:11px;
+    padding:11px 22px;margin-top:6px;box-shadow:0 3px 12px rgba(181,83,15,.25)}
+  .cta:hover{background:var(--amber-bright);text-decoration:none}
+  .asks li{margin:8px 0;font-size:15.5px}
+  .asks b{color:var(--ink)}
+  footer{padding:34px 0 60px;text-align:center;color:var(--faint);font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="mark">Make<span>Mode</span></div>
+    <p class="lede">A coding agent for designers, not developers — describe it, watch it build, publish a link. On European infrastructure your university can actually approve.</p>
+    <div class="meta"><span class="tag">Internal plan</span> · for Emma · <b>makemode.nl</b></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <span class="tag">The why</span>
+    <h2>The opportunity</h2>
+    <p class="lead">European design students need to make interactive things — portfolios, concepts, data viz — but they aren't coders, and every tool that helps routes their work through US infrastructure their institution can't sanction.</p>
+    <p>MakeMode is the European, design-school answer: <b>Claude-Code-grade agent power wrapped in a surface a designer can use</b>, GDPR-native and EU-hosted end to end. The pattern is proven — Anthropic's <b>Claude Cowork</b> (Claude Code's power for non-developers, shipped in ~10 days) shows the shape works. We're pointing that shape at a specific, underserved, sovereignty-sensitive niche no US tool occupies: <b>TU Delft design students first</b>, then EU design education.</p>
+    <p><b>Two buyers, one product.</b> The student adopts it free and spreads it by sharing live links; the institution pays, because sovereignty is what lets them say yes.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">The product</span>
+    <h2>Describe → see it → share it</h2>
+    <p class="sub">The whole experience is one calm loop — Lovable's make-and-publish with the composure of the Claude app.</p>
+    <div class="loop">
+      <span class="step"><b>Log in</b></span><span class="arrow">→</span>
+      <span class="step"><b>Describe</b> in words</span><span class="arrow">→</span>
+      <span class="step"><b>See it</b> live</span><span class="arrow">→</span>
+      <span class="step"><b>It saves</b> itself</span><span class="arrow">→</span>
+      <span class="step"><b>Share</b> a link</span>
+    </div>
+    <p style="text-align:center;margin-top:22px"><a class="cta" href="demo.html">Open the live prototype →</a></p>
+    <p style="text-align:center;color:var(--faint);font-size:13px">A click-through of the real design — onboarding, the make-loop, and the publish moment.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">Where we are</span>
+    <h2>Honest status</h2>
+    <p class="sub">The sovereign stack is built and verified. The remaining work is the agentic make-loop and the pilot.</p>
+    <div class="board">
+      <div class="card ok"><h3>✓ Working, verified end-to-end</h3><ul>
+        <li>EU inference — GLM 5.2 via <b>Scaleway (France)</b>, zero-setup</li>
+        <li><b>Save</b> — invisible auto-snapshot + push to GitLab</li>
+        <li><b>Publish</b> — one click → a real public EU URL (Scaleway object storage)</li>
+        <li>The <b>MakeMode shell</b> (cream design system, light/dark) served by the app</li>
+        <li>One French vendor for inference + publishing = one GDPR DPA</li>
+      </ul></div>
+      <div class="card work"><h3>⟳ In progress (the active task)</h3><ul>
+        <li><b>Live agentic chat</b> — wired, but the model needs work: the engine resolves GLM (slow) and not yet the snappier Devstral. Fix in flight.</li>
+      </ul></div>
+      <div class="card next"><h3>○ Not started — gates the pilot, not the build</h3><ul>
+        <li>Pilot with a TU Delft studio · grant submissions · signed DPAs · lawyer review</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">The plan</span>
+    <h2>How we win</h2>
+    <p class="sub">Start where there's no compliance wall, win on UX, let shared links spread it, get the institution to pay for sovereignty — then climb toward higher-value research.</p>
+    <div class="phase"><div class="when">now → Sep</div><div class="what"><b>Foundation & unblock</b><span>Stack done. Finish the make-loop; line up a pilot via the TU Delft AI initiative.</span></div></div>
+    <div class="phase"><div class="when">Q4 2026</div><div class="what"><b>Pilot</b><span>One IDE studio uses it free; students publish + share real links.</span></div></div>
+    <div class="phase"><div class="when">Q4–Q1</div><div class="what"><b>Prove & fund</b><span>Convert to a paid workspace; submit grants (WBSO, Sovereign Tech Fund, NLnet, AiNed).</span></div></div>
+    <div class="phase"><div class="when">2027</div><div class="what"><b>Expand</b><span>Second faculty → second institution. Raise from strength, or stay non-dilutive.</span></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">Team & money</span>
+    <h2>Two founders + an agent fleet</h2>
+    <div class="two">
+      <div class="card"><h3>The team</h3><ul style="list-style:none;padding:0">
+        <li><b>Derek</b> — outward: narrative, fundraising, the institutional deal</li>
+        <li style="margin-top:8px"><b>Emma</b> — TU Delft + AI/product: the warm path to a faculty sponsor, agent quality, the credible face to students</li>
+        <li style="margin-top:8px"><b>Agent fleet</b> — specialised AI agents do the workstreams; founders supervise. No build hire needed for v0.</li>
+      </ul></div>
+      <div class="card"><h3>Funding — non-dilutive first</h3><ul style="list-style:none;padding:0">
+        <li><b>Grants</b> — WBSO, Sovereign Tech Fund (€50k–1M), NLnet, AiNed, Delft AI</li>
+        <li style="margin-top:8px"><b>Lighthouse revenue</b> — the paid TU Delft workspace</li>
+        <li style="margin-top:8px"><b>Equity</b> — later, from strength, if we choose to accelerate</li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">What we need next</span>
+    <h2>The asks</h2>
+    <ul class="asks">
+      <li><span class="pin"></span> <b>Emma:</b> can the TU Delft AI initiative <b>host a pilot or co-apply for a grant</b> — does it have budget / cohorts / faculty backing? And the warm intro to an IDE studio.</li>
+      <li><span class="pin"></span> <b>Derek:</b> register the institutional GitLab + finish the make-loop so it's demoable.</li>
+      <li><span class="pin"></span> <b>Both:</b> retain a fractional Dutch tech lawyer; line up the first grant (WBSO once the BV exists).</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="tag">Built so far</span>
+    <h2>The assets</h2>
+    <p class="sub">A lot already exists — this isn't a pitch deck, it's a working system + a full plan.</p>
+    <div>
+      <span class="pill">Desktop app (Tauri + opencode)</span>
+      <span class="pill">EU model auto-config</span>
+      <span class="pill">Cost / CO₂ HUD</span>
+      <span class="pill">GitLab login + auto-push</span>
+      <span class="pill">EU publish (Scaleway)</span>
+      <span class="pill">Cream design system</span>
+      <span class="pill">Shell prototype</span>
+      <span class="pill">Strategy + 90-day playbook</span>
+      <span class="pill">GDPR sub-processor map</span>
+      <span class="pill">v0 legal drafts</span>
+      <span class="pill">Grant pipeline</span>
+      <span class="pill">Sovereignty verification</span>
+      <span class="pill">User-journey map</span>
+      <span class="pill">Marketing site + pitch</span>
+    </div>
+    <p style="margin-top:20px"><a href="pitch.html">→ The pitch</a> &nbsp;·&nbsp; <a href="calculator.html">→ Unit economics</a> &nbsp;·&nbsp; <a href="demo.html">→ The prototype</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    MakeMode · makemode.nl · the sovereign make-and-publish tool for European design education<br>
+    <span style="color:var(--faint)">Internal — for Emma. Early-stage; institutions/models named are references, not partnerships.</span>
+  </div>
+</footer>
+
+</body>
+</html>

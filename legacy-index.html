@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MakeMode — Sovereign AI coding for Europe</title>
+<meta name="description" content="An open-source AI coding agent that runs entirely on European infrastructure. The coding assistant your institution is actually allowed to use — GDPR-native, auditable, no US vendor, nothing leaving the EU." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2317150F'/><path d='M20 66 L40 38 L54 54 L66 32 L80 66' stroke='%23C2570F' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#F4F2EB;--bone2:#EDE9DE;--card:#FBFAF5;--ink:#17150F;--ink2:#4b4636;--mut:#6b6555;
+    --line:#ddd7c8;--line2:#e7e2d6;--amber:#C2570F;--amber-br:#E0701C;--amber-soft:#f5e7d6;
+    --dark:#16140E;--dark2:#211d14;--dark-line:#34301f;--cream-on-dark:#e9e3d4;--mut-on-dark:#a59c84;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    --max:1140px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--bone);line-height:1.6;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv01"}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px}
+  section{padding:96px 0;position:relative}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.018em;line-height:1.07}
+  .mono{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+  .kick{color:var(--amber);display:inline-flex;align-items:center;gap:10px}
+  .kick:before{content:"";width:9px;height:9px;background:var(--amber);display:inline-block}
+  .muted{color:var(--ink2)}
+
+  /* polder-grid texture */
+  .polder{background-image:
+    repeating-linear-gradient(90deg,rgba(23,21,15,.05) 0 1px,transparent 1px 72px),
+    repeating-linear-gradient(0deg,rgba(23,21,15,.035) 0 1px,transparent 1px 24px);}
+
+  /* NAV */
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(244,242,235,.82);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--mono);font-size:1.02rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+  .mark{width:30px;height:30px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
+  .mark svg{width:20px;height:20px}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:.92rem;color:var(--ink2);font-weight:450}
+  .nav-links a:hover{color:var(--ink)}
+  .btn{display:inline-block;padding:11px 20px;font-weight:500;font-size:.92rem;transition:.16s;cursor:pointer;border:1px solid transparent;font-family:var(--sans)}
+  .btn-primary{background:var(--amber);color:#fff}
+  .btn-primary:hover{background:var(--amber-br)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+  .btn-ghost:hover{border-color:var(--ink)}
+  @media(max-width:780px){.nav-links a:not(.btn){display:none}}
+
+  /* HERO */
+  .hero{padding:96px 0 78px;overflow:hidden}
+  .hero .lbl{margin-bottom:26px}
+  h1.hero-h{font-size:clamp(2.7rem,6vw,4.7rem);max-width:15ch;letter-spacing:-.025em}
+  h1.hero-h em{font-style:normal;color:var(--amber)}
+  .hero-sub{font-size:clamp(1.08rem,1.7vw,1.32rem);color:var(--ink2);max-width:46ch;margin-top:26px}
+  .hero-cta{display:flex;gap:13px;margin-top:36px;flex-wrap:wrap}
+  .hero-cta .btn{padding:14px 26px;font-size:1rem}
+  .hero-meta{margin-top:46px;display:flex;gap:30px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:24px}
+  .hero-meta div{font-size:.88rem;color:var(--mut)}
+  .hero-meta b{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--ink);font-weight:500;letter-spacing:-.01em}
+
+  /* TERMINAL band */
+  .term-band{background:var(--dark);color:var(--cream-on-dark);border-top:1px solid var(--dark-line);border-bottom:1px solid var(--dark-line)}
+  .term-band .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:50px;align-items:center}
+  .term-band .kick{color:var(--amber-br)}
+  .term-band h2{color:#fff;font-size:clamp(1.6rem,2.8vw,2.2rem);margin-top:14px;max-width:16ch}
+  .term-band p{color:var(--mut-on-dark);margin-top:16px;max-width:42ch}
+  .terminal{background:#0e0d09;border:1px solid var(--dark-line);border-radius:10px;overflow:hidden;font-family:var(--mono);font-size:.86rem;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+  .term-top{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--dark-line)}
+  .term-top i{width:11px;height:11px;border-radius:50%;background:#3a3527;display:block}
+  .term-top span{margin-left:8px;color:var(--mut-on-dark);font-size:.74rem;letter-spacing:.04em}
+  .term-body{padding:18px 18px 22px;line-height:1.85}
+  .term-body .c{color:#7d765f}.term-body .p{color:var(--amber-br)}.term-body .g{color:#7ec698}.term-body .w{color:#e9e3d4}.term-body .b{color:#6f93c9}
+  @media(max-width:820px){.term-band .wrap{grid-template-columns:1fr;gap:32px}}
+
+  /* photo bands (warm duotone) */
+  .photoband{position:relative;min-height:440px;display:flex;align-items:flex-end;overflow:hidden;border-top:1px solid var(--dark-line);border-bottom:1px solid var(--dark-line)}
+  .photoband img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.62) sepia(.4) contrast(1.06) saturate(.85) brightness(.88);z-index:0}
+  .photoband:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(20,18,12,.88) 0%,rgba(20,18,12,.5) 48%,rgba(194,87,15,.3) 100%);z-index:1}
+  .photoband .pc{position:relative;z-index:2;padding:52px 0}
+  .photoband .kick{color:var(--amber-br)}
+  .photoband h2{color:#fff;font-size:clamp(1.7rem,3.4vw,2.6rem);max-width:20ch;margin-top:13px}
+  .photoband p{color:#e9e3d4;max-width:46ch;margin-top:14px;font-size:1.04rem}
+  .cta .box.photo{border-color:var(--dark-line)}
+  .cta .box.photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(.6) sepia(.35) contrast(1.05) brightness(.62);z-index:0}
+  .cta .box.photo:before{content:"";position:absolute;inset:0;background:linear-gradient(150deg,rgba(20,18,12,.88),rgba(194,87,15,.42));z-index:0}
+  .cta .box.photo h2{color:#fff}
+  .cta .box.photo p{color:#e9e3d4}
+  .cta .box.photo .kick{color:var(--amber-br)}
+  .cta .box.photo .alt{color:#cdbfa6}
+  .cta .box.photo .alt a{color:#fff}
+
+  .lead{font-size:clamp(1.9rem,3.4vw,2.7rem);max-width:17ch}
+  .body{font-size:1.06rem;color:var(--ink2);max-width:60ch;margin-top:18px}
+
+  /* PROBLEM */
+  .prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:50px;border-top:1px solid var(--line)}
+  .prob{padding:30px 30px 30px 0;border-bottom:1px solid var(--line)}
+  .prob:nth-child(odd){padding-left:0;padding-right:40px}
+  .prob:nth-child(even){padding-left:40px;border-left:1px solid var(--line)}
+  .prob .n{color:var(--amber);font-family:var(--mono);font-size:.8rem;font-weight:500}
+  .prob h3{font-size:1.32rem;margin:12px 0 8px;font-weight:500}
+  .prob p{font-size:.97rem;color:var(--ink2)}
+  @media(max-width:720px){.prob-grid{grid-template-columns:1fr}.prob,.prob:nth-child(even){padding:26px 0;border-left:0}}
+
+  /* STACK */
+  .stack-row{display:grid;grid-template-columns:1.05fr 1fr;gap:54px;align-items:center}
+  .layers{display:flex;flex-direction:column;gap:14px}
+  .layer{display:flex;align-items:center;gap:18px;padding:22px 22px;background:var(--card);border:1px solid var(--line)}
+  .layer .ln{font-family:var(--mono);font-size:.72rem;color:var(--amber);letter-spacing:.12em;flex:0 0 64px}
+  .layer .lt{font-family:var(--serif);font-weight:500;font-size:1.12rem}
+  .layer .ls{font-size:.88rem;color:var(--ink2);margin-top:2px}
+  .layer.b{background:var(--ink);border-color:var(--ink)}
+  .layer.b .lt{color:#fff}.layer.b .ls{color:var(--mut-on-dark)}.layer.b .ln{color:var(--amber-br)}
+  .layer.b .tag{margin-left:auto;font-family:var(--mono);font-size:.68rem;color:#7ec698;border:1px solid #2f5a3f;padding:4px 9px;letter-spacing:.06em}
+  .checklist{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:14px}
+  .checklist li{display:flex;gap:13px;font-size:1rem}
+  .checklist .sq{width:16px;height:16px;background:var(--amber);flex:0 0 auto;margin-top:5px;display:grid;place-items:center}
+  .checklist .sq:after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+  @media(max-width:860px){.stack-row{grid-template-columns:1fr;gap:34px}}
+
+  /* CAPABILITIES */
+  .caps{background:var(--bone2)}
+  .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:50px;background:var(--line);border:1px solid var(--line)}
+  .cap{background:var(--bone2);padding:30px 26px}
+  .cap .k{font-family:var(--mono);font-size:.72rem;color:var(--amber);letter-spacing:.1em}
+  .cap h3{font-size:1.18rem;margin:14px 0 8px;font-weight:500}
+  .cap p{font-size:.94rem;color:var(--ink2)}
+  @media(max-width:820px){.cap-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.cap-grid{grid-template-columns:1fr}}
+
+  /* TIERS */
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:50px}
+  .tier{border:1px solid var(--line);background:var(--card);padding:30px 26px;position:relative}
+  .tier.hl{border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber)}
+  .tier .num{font-family:var(--mono);font-size:.74rem;color:var(--amber);letter-spacing:.1em}
+  .tier h3{font-size:1.4rem;margin:10px 0 4px;font-weight:500}
+  .tier .where{font-size:.9rem;color:var(--mut);margin-bottom:20px;font-family:var(--mono)}
+  .tier ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .tier li{font-size:.93rem;display:flex;gap:11px;color:var(--ink2)}
+  .tier li:before{content:"▪";color:var(--amber)}
+  .tier .pill{position:absolute;top:-11px;left:26px;background:var(--amber);color:#fff;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;padding:4px 11px}
+  @media(max-width:820px){.tier-grid{grid-template-columns:1fr}}
+
+  /* COMPARE */
+  .compare{background:var(--dark);color:var(--cream-on-dark)}
+  .compare h2{color:#fff}
+  .compare .kick{color:var(--amber-br)}
+  table.cmp{width:100%;border-collapse:collapse;margin-top:42px}
+  table.cmp th,table.cmp td{padding:17px 16px;text-align:left;border-bottom:1px solid var(--dark-line);font-size:.97rem}
+  table.cmp thead th{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;color:var(--mut-on-dark);font-weight:500}
+  table.cmp th.us{color:#fff}
+  table.cmp td:first-child{color:var(--mut-on-dark)}
+  table.cmp .cu{background:rgba(194,87,15,.12)}
+  .yes{color:#7ec698;font-weight:600}.no{color:#cf7b54}
+  @media(max-width:680px){table.cmp th,table.cmp td{padding:12px 9px;font-size:.84rem}}
+
+  /* CTA */
+  .cta .box{border:1px solid var(--line);background:var(--card);padding:70px 40px;text-align:center;position:relative;overflow:hidden}
+  .cta .box .polder{position:absolute;inset:0;opacity:.5;z-index:0}
+  .cta .box>*{position:relative;z-index:1}
+  .cta h2{font-size:clamp(2rem,3.6vw,2.9rem);max-width:18ch;margin:0 auto}
+  .cta p{color:var(--ink2);max-width:50ch;margin:18px auto 0;font-size:1.06rem}
+  .cta .btn{margin-top:30px;padding:15px 32px;font-size:1.04rem}
+  .cta .alt{margin-top:14px;font-size:.88rem;color:var(--mut)}
+  .cta .alt a{color:var(--amber);text-decoration:underline}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:46px 0}
+  .foot-in{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px}
+  .foot-links{display:flex;gap:26px;font-size:.9rem;color:var(--ink2)}
+  .foot-links a:hover{color:var(--amber)}
+  .disc{font-size:.76rem;color:var(--mut);margin-top:22px;max-width:74ch;line-height:1.6}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header class="nav"><div class="wrap nav-in">
+  <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 100 100"><path d="M20 66 L40 38 L54 54 L66 32 L80 66" stroke="#C2570F" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>MakeMode</a>
+  <nav class="nav-links">
+    <a href="#problem">The problem</a>
+    <a href="#how">How it works</a>
+    <a href="#tiers">Deployment</a>
+    <a href="calculator.html">Economics</a>
+    <a href="pitch.html">Why now</a>
+    <a href="#contact" class="btn btn-primary">Request a pilot</a>
+  </nav>
+</div></header>
+
+<a id="top"></a>
+<section class="hero polder">
+  <div class="wrap">
+    <div class="mono kick lbl">NL · Sovereign AI · Built in Europe</div>
+    <h1 class="hero-h">The coding agent your institution is <em>actually allowed</em> to use.</h1>
+    <p class="hero-sub">MakeMode is an open-source AI software-engineering agent that keeps every keystroke, file and prompt inside the EU. No US vendor. No data crossing the Atlantic. Nothing a foreign government can switch off.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Request a pilot</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <div class="hero-meta">
+      <div><b>Open source</b>agent + open weights</div>
+      <div><b>EU-hosted</b>residency by architecture</div>
+      <div><b>Auditable</b>no telemetry, GDPR-native</div>
+    </div>
+  </div>
+</section>
+
+<section class="term-band">
+  <div class="wrap">
+    <div>
+      <div class="mono kick">Running today</div>
+      <h2>Not a concept. A system you can run right now.</h2>
+      <p>The same open agent your developers already like, pointed at a model hosted on European soil. One line of config — and the data never leaves.</p>
+    </div>
+    <div class="terminal">
+      <div class="term-top"><i></i><i></i><i></i><span>makemode — opencode</span></div>
+      <div class="term-body">
+<span class="c"># sovereign coding, on EU infrastructure</span><br>
+<span class="p">$</span> <span class="w">opencode run</span> <span class="g">"refactor the auth module"</span><br>
+<span class="c">  ▸ build · glm-5.2 · eurouter (EU)</span><br>
+<span class="b">  ✓</span> <span class="w">3 files edited · tests green</span><br>
+<span class="b">  ✓</span> <span class="g">data stays in the EU</span><br>
+<span class="b">  ✓</span> <span class="w">no vendor outside European jurisdiction</span><br>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="photoband">
+  <img src="https://images.unsplash.com/photo-1534801425708-1c57ee8a2fc8?w=1900&q=80&auto=format&fit=crop" alt="Aerial view of a Dutch polder — reclaimed land divided by drainage ditches" loading="lazy">
+  <div class="wrap pc">
+    <div class="mono kick">The Netherlands · land reclaimed from the sea</div>
+    <h2>Land built — and governed — by the people who live on it.</h2>
+    <p>A polder is land a nation makes for itself, and keeps for itself. Sovereign infrastructure is the same idea, for software.</p>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="mono kick">Why Copilot &amp; Claude Code stay blocked</div>
+    <h2 class="lead" style="margin-top:16px">Your best people can't touch the best AI tools — for good reasons.</h2>
+    <div class="prob-grid">
+      <div class="prob reveal"><div class="n">01</div><h3>Code leaves the EU</h3><p>US-hosted assistants send your source, research data and prompts to American servers. Under the US CLOUD Act and post-Schrems II scrutiny, that's a line legal and DPO offices won't cross.</p></div>
+      <div class="prob reveal"><div class="n">02</div><h3>No contract they can sign</h3><p>Public institutions can't approve an opaque per-seat US SaaS. No DPA on acceptable terms, no transparency — and procurement simply says no.</p></div>
+      <div class="prob reveal"><div class="n">03</div><h3>Student &amp; research data at risk</h3><p>Anything touching personal or sensitive research data falls under GDPR. A black-box model in another jurisdiction is a non-starter for ethics boards.</p></div>
+      <div class="prob reveal"><div class="n">04</div><h3>It can be switched off</h3><p>A tool your institution depends on can be revoked by a foreign government overnight. Dependency on it is now a strategic vulnerability, not a convenience.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="polder">
+  <div class="wrap stack-row">
+    <div class="layers reveal">
+      <div class="layer"><span class="ln">UI</span><div><div class="lt">Open-source agent</div><div class="ls">Terminal · IDE · web — fully auditable, no telemetry</div></div></div>
+      <div class="layer"><span class="ln">MODEL</span><div><div class="lt">Open-weight model</div><div class="ls">Run today's best open model — swappable, never locked in</div></div></div>
+      <div class="layer b"><span class="ln">EU</span><div><div class="lt">European compute</div><div class="ls">EU gateway · sovereign cloud · or your own servers</div></div><span class="tag">DATA STAYS IN EU</span></div>
+    </div>
+    <div class="reveal">
+      <div class="mono kick">How it works</div>
+      <h2 class="lead" style="margin-top:14px;font-size:clamp(1.7rem,3vw,2.4rem)">Three open layers. One sovereign stack.</h2>
+      <p class="body">MakeMode isn't a new model — it's a thin, transparent layer that assembles proven open components into something an institution can own, inspect and host.</p>
+      <ul class="checklist">
+        <li><span class="sq"></span><span><b>Swap the backend in one line</b> — move from a hosted EU endpoint to your own GPUs without changing the workflow.</span></li>
+        <li><span class="sq"></span><span><b>Inspect everything</b> — open source end to end; your security team can read the code that handles your code.</span></li>
+        <li><span class="sq"></span><span><b>Stay current</b> — a thin layer, not a hard fork; you ride upstream improvements instead of maintaining a clone.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="caps">
+  <div class="wrap">
+    <div class="mono kick">Capabilities</div>
+    <h2 class="lead" style="margin-top:16px">Everything the policy office asks for — built in.</h2>
+    <div class="cap-grid">
+      <div class="cap reveal"><div class="k">/ residency</div><h3>EU data residency</h3><p>Prompts, code and outputs never leave European jurisdiction. Pick the data centre — and prove where it sits.</p></div>
+      <div class="cap reveal"><div class="k">/ identity</div><h3>SURFconext SSO</h3><p>Federated login every Dutch university already runs. Roll out to a faculty without provisioning a single new account.</p></div>
+      <div class="cap reveal"><div class="k">/ audit</div><h3>Auditable &amp; telemetry-free</h3><p>No phone-home. Configurable audit logs your DPO can read. What you can inspect, you can approve.</p></div>
+      <div class="cap reveal"><div class="k">/ policy</div><h3>Policy guardrails</h3><p>Per-institution rules: allowlists, redaction, path restrictions, retention. The AI-use policy, enforced in software.</p></div>
+      <div class="cap reveal"><div class="k">/ open</div><h3>Fully open source</h3><p>Permissive licences top to bottom. No lock-in, procurement-friendly, forkable by your own staff.</p></div>
+      <div class="cap reveal"><div class="k">/ deploy</div><h3>Self-hostable</h3><p>From a managed EU endpoint to fully air-gapped on your own cluster — same agent, your choice of how private.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="wrap">
+    <div class="mono kick">Deployment</div>
+    <h2 class="lead" style="margin-top:16px">Start in a week. Scale to national infrastructure.</h2>
+    <div class="tier-grid">
+      <div class="tier reveal"><div class="num">TIER 0</div><h3>Gateway</h3><div class="where">EU-hosted endpoint</div><ul><li>Live in days, no infrastructure</li><li>Ideal for a course or pilot group</li><li>Lowest cost per token</li><li>EU data residency guaranteed</li></ul></div>
+      <div class="tier hl reveal"><span class="pill">PILOT PATH</span><div class="num">TIER 1</div><h3>Sovereign hosting</h3><div class="where">EU GPUs · national compute</div><ul><li>Model served on European infrastructure</li><li>Data stays on the continent</li><li>Shared, sovereign, cost-efficient at scale</li><li>Interactive by day, batch by night</li></ul></div>
+      <div class="tier reveal"><div class="num">TIER 2</div><h3>On-prem / air-gapped</h3><div class="where">Your own cluster</div><ul><li>For medical, legal &amp; sensitive research</li><li>Nothing leaves your network</li><li>Full control of weights and logs</li><li>Maximum assurance for ethics boards</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="wrap">
+    <div class="mono kick">The difference</div>
+    <h2 class="lead" style="margin-top:16px">It's not about beating them. It's about being allowed.</h2>
+    <table class="cmp">
+      <thead><tr><th></th><th class="us">MakeMode</th><th>US closed agents</th></tr></thead>
+      <tbody>
+        <tr><td>Data stays in the EU</td><td class="cu"><span class="yes">Yes</span></td><td><span class="no">No</span></td></tr>
+        <tr><td>Open source &amp; auditable</td><td class="cu"><span class="yes">Yes</span></td><td><span class="no">No</span></td></tr>
+        <tr><td>Self-hostable / air-gappable</td><td class="cu"><span class="yes">Yes</span></td><td><span class="no">No</span></td></tr>
+        <tr><td>Cannot be revoked by a foreign state</td><td class="cu"><span class="yes">Yes</span></td><td><span class="no">No</span></td></tr>
+        <tr><td>Signable DPA on your terms</td><td class="cu"><span class="yes">Yes</span></td><td><span class="no">Rarely</span></td></tr>
+        <tr><td>Cost per million tokens</td><td class="cu"><span class="yes">~€1.4 / €4.2</span></td><td>~€4.6 / €23</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="box photo">
+      <img src="https://images.unsplash.com/photo-1593495603376-7ae2d9ec46f1?w=1700&q=80&auto=format&fit=crop" alt="European institutional architecture" loading="lazy">
+      <div class="mono kick" style="justify-content:center;margin-bottom:18px">Sovereign by architecture</div>
+      <h2>Bring sovereign AI engineering to your institution.</h2>
+      <p>We're running first pilots with European universities and research groups now. A Tier 0 pilot takes a week to stand up — and gives your policy office something it can finally say yes to.</p>
+      <a href="mailto:hello@makemode.nl?subject=MakeMode%20pilot%20enquiry" class="btn btn-primary">Request a pilot</a>
+      <div class="alt">Or read the code on <a href="#">GitHub</a> · talk to us at <a href="mailto:hello@makemode.nl">hello@makemode.nl</a></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="#top"><span class="mark"><svg viewBox="0 0 100 100"><path d="M20 66 L40 38 L54 54 L66 32 L80 66" stroke="#C2570F" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>MakeMode</a>
+      <div class="foot-links">
+        <a href="#problem">Problem</a>
+        <a href="#how">How it works</a>
+        <a href="#tiers">Deployment</a>
+        <a href="calculator.html">Economics</a>
+        <a href="pitch.html">Why now</a>
+        <a href="mailto:hello@makemode.nl">Contact</a>
+      </div>
+    </div>
+    <p class="disc">MakeMode is an early-stage concept. Open-weight models referenced can be served behind the agent; names and trademarks belong to their respective owners. SURF, SURFconext, TU Delft and European institutions are referenced as relevant infrastructure and context, not as endorsements or partners. Pricing is indicative.</p>
+  </div>
+</footer>
+
+<script>
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px 120% 0px'});
+  els.forEach((el,i)=>{el.style.transitionDelay=(i%4*55)+'ms';io.observe(el)});
+  // safety net: never leave content hidden (covers no-scroll, print, slow JS)
+  setTimeout(()=>els.forEach(e=>e.classList.add('in')),1400);
+</script>
+</body>
+</html>
