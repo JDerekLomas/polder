@@ -28,16 +28,18 @@ the **institution** pays, because sovereignty is what lets them say yes.
 ## Current status (honest, 2026-06-29)
 
 **Works, verified end-to-end:**
-- EU inference — **GLM 5.2 via Scaleway Generative APIs (France)**, zero-setup, EU-hosted
+- **The make-loop is LIVE** — in the app: describe → **Devstral 2 (Scaleway/France) builds a
+  page** → live preview → **publish to a real EU URL**. Whole loop verified end-to-end.
+- EU inference — Devstral 2 for the make-loop; GLM 5.2 for the heavier agent path
 - **Save** — invisible auto-snapshot + push to GitLab (verified live)
 - **Publish** — one click → a real public EU URL on Scaleway object storage (verified, HTTP 200)
-- The **MakeMode shell** (cream design system, light/dark) served by the app's own server
+- The **MakeMode shell** (cream design system, light/dark) is now the app's front door
 - Sovereign stack consolidated on **one French vendor (Scaleway)** = one GDPR DPA
 
-**In progress / blocked:**
-- **Live agentic chat in the shell** — wired, but blocked on the model: the opencode engine
-  resolves only GLM-5.2 (Devstral throws `ProviderModelNotFoundError`), and GLM's agent loop is
-  too slow for an interactive feel. Fix paths in `polder-app` notes. *This is the active task.*
+**In progress:**
+- **The full opencode *agent* path** (for ambitious multi-file / tool-using work) still needs the
+  model-resolution fix (opencode resolves GLM but not Devstral). The simple make-loop is
+  unblocked by calling Scaleway directly; the agent is the next tier for bigger tasks.
 
 **Not started (deliberately — these gate the pilot, not the build):**
 - Pilot with a TU Delft studio · grant submissions · signed DPAs · lawyer review of `legal/`
