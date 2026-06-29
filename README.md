@@ -28,13 +28,17 @@ the **institution** pays, because sovereignty is what lets them say yes.
 ## Current status (honest, 2026-06-29)
 
 **Works, verified end-to-end:**
-- **The make-loop is LIVE** — in the app: describe → **Devstral 2 (Scaleway/France) builds a
-  page** → live preview → **publish to a real EU URL**. Whole loop verified end-to-end.
-- EU inference — Devstral 2 for the make-loop; GLM 5.2 for the heavier agent path
-- **Save** — invisible auto-snapshot + push to GitLab (verified live)
-- **Publish** — one click → a real public EU URL on Scaleway object storage (verified, HTTP 200)
-- The **MakeMode shell** (cream design system, light/dark) is now the app's front door
-- Sovereign stack consolidated on **one French vendor (Scaleway)** = one GDPR DPA
+- **A WEB version is LIVE and fully Scaleway-hosted (sovereign):**
+  **https://makemode-app.s3-website.fr-par.scw.cloud** — frontend on Scaleway Object Storage,
+  backend on a Scaleway Function (fr-par), inference + publish on Scaleway. **No US vendor in
+  the product path.** Describe → build → live preview → publish to a real EU URL. No install.
+- **The make-loop** — describe → a model builds a single-file page → live preview → publish.
+  Verified in both the **desktop app** (Tauri, `../makemode-app`) and the web app.
+- **Model picker** on arrival — Mistral (fast, default) / Devstral 2 / GLM 5.2, all EU-hosted.
+- **Version History** — auto-snapshot every change; roll back to any version.
+- **Claude-style sidebar** — your projects, current highlighted, "+ New".
+- **Save → GitLab** (desktop) + **Publish → public EU URL** (Scaleway), verified.
+- Sovereign stack on **one French vendor (Scaleway)** — hosting + inference + publish = one DPA.
 
 **In progress:**
 - **The full opencode *agent* path** (for ambitious multi-file / tool-using work) still needs the
