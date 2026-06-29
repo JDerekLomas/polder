@@ -12,8 +12,9 @@
 > single GDPR DPA** and removes the EUrouter router-opacity problem. Net effect on this
 > map: the "EUrouter/GLM host" sub-processor below is replaced by **Scaleway** for *both*
 > inference and publishing. **Provenance note:** the default (GLM) is Chinese-origin open
-> weights — EU-*hosted*, so the data path is sovereign, but if a procurement story needs
-> zero non-EU provenance, switch the default to Devstral (one-line config change).
+> weights — EU-*hosted*, so the data path is sovereign. A fully-EU-provenance default
+> (Devstral 2, Mistral/FR) is the intended end state but the opencode engine doesn't yet
+> resolve it (`ProviderModelNotFoundError`) — a tracked fix, not yet a config flip.
 > EUrouter retained as a documented alternative (`verification/eu-inference-alternatives.md`).
 > Sub-processor DPA to sign: **Scaleway** (standard, published).
 
