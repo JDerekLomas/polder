@@ -30,8 +30,11 @@ that rename is done. "MakeMode" is the product, "polder" is the metaphor.)
 - **`scw-function/`** — the real backend: a **Scaleway Function** (`makemode-api`, node22, fr-par)
   that handles make + publish, routed by an `action` field. Deps must be **bundled into the zip**
   — Scaleway does not run `npm install`. `handler.js` is the entry.
-- **`api/`** (`make.js`, `publish.js`) — Vercel serverless equivalents used by the brochure/demo.
 - **`verification/`, `legal/`, `outreach/`** — supporting research, legal text, and outreach material.
+
+> The former Vercel `api/` functions (`make.js`, `publish.js`) were **removed** — they were
+> orphaned (no page called them) and the only inference/publish path is now the Scaleway
+> function in `scw-function/`. Keep it that way: MakeMode is all-Scaleway. See `DEPLOY.md`.
 
 ## Live URLs
 - **Web app (sovereign, no install):** https://makemode-app.s3-website.fr-par.scw.cloud
