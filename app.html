@@ -176,6 +176,7 @@
 
 <script>
   // ---- state (localStorage) ----
+  var API='https://makemodeapi75i9zkz5-makemode-api.functions.fnc.fr-par.scw.cloud';
   var model='mistral-small-3.2-24b-instruct-2506';
   var MODEL_LABEL={'mistral-small-3.2-24b-instruct-2506':'Mistral','devstral-2-123b-instruct-2512':'Devstral 2','glm-5.2':'GLM 5.2'};
   var current=null; // project id
@@ -209,14 +210,11 @@
     if(!p){p={id:slugify(text.split(/\s+/).slice(0,4).join(' '))||('p'+Date.now()),title:text.slice(0,40),html:'',model:model,updated:Date.now(),versions:[]};current=p.id;setProjName(p.id);}
     setFrame('<!doctype html><meta charset=utf-8><style>html,body{height:100%;margin:0;display:grid;place-items:center;background:#f4efe6;font-family:system-ui;color:#8a8275}</style><div>Building…</div>');
     try{
-      var res=await fetch('/api/make',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({text:text,model:model,currentHtml:p.html||''})});
-      if(!res.ok||!res.body){var msg=await res.text().catch(function(){return''});b.remove();addAI('⚠ '+(msg||'could not build'));return}
-      var reader=res.body.getReader();var dec=new TextDecoder();var html='';var last=0;
-      while(true){var r=await reader.read();if(r.done)break;html+=dec.decode(r.value,{stream:true});var now=Date.now();if(now-last>120){last=now;setFrame(stripFences(html))}}
-      html=stripFences(html);
-      if(!html){b.remove();addAI('⚠ the model returned an empty page');return}
-      setFrame(html);
-      p.html=html;p.updated=Date.now();p.versions.unshift({ts:Date.now(),text:text,html:html});p.versions=p.versions.slice(0,15);
+      var res=await fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'make',text:text,model:model,currentHtml:p.html||''})});
+      var d=await res.json();
+      if(d.error||!d.html){b.remove();addAI('⚠ '+(d.error||'could not build'));return}
+      setFrame(d.html);
+      p.html=d.html;p.updated=Date.now();p.versions.unshift({ts:Date.now(),text:text,html:d.html});p.versions=p.versions.slice(0,15);
       upsert(p);
       b.remove();addAI('Done ✦ It’s on the right. Tell me what to change, or hit Publish & share.');
       renderSidebar();
@@ -243,7 +241,7 @@
   // publish
   function openSheet(){var sc=document.getElementById('scrim');var p=current?proj(current):null;if(!p||!p.html){sc.classList.add('open');document.getElementById('liveurl').value='Make something first';return}
     var url=document.getElementById('liveurl');url.value='Publishing…';sc.classList.add('open');
-    fetch('/api/publish',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({name:p.id,html:p.html})}).then(function(r){return r.json()}).then(function(d){url.value=d.url||('⚠ '+(d.error||'publish failed'))}).catch(function(){url.value='⚠ could not reach the publish server'})}
+    fetch(API,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'publish',name:p.id,html:p.html})}).then(function(r){return r.json()}).then(function(d){url.value=d.url||('⚠ '+(d.error||'publish failed'))}).catch(function(){url.value='⚠ could not reach the publish server'})}
   function closeSheet(){document.getElementById('scrim').classList.remove('open')}
   function copyUrl(){var b=document.getElementById('copybtn');try{navigator.clipboard.writeText(document.getElementById('liveurl').value)}catch(e){}b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy'},1400)}
   function openLive(){var u=document.getElementById('liveurl').value;if(u&&u.indexOf('http')===0)window.open(u,'_blank')}
