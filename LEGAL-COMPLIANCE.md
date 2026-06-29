@@ -54,6 +54,12 @@
 > policies. Be *"ISO 27001-aligned"* (have the controls/policies written) for the pilot;
 > pursue actual certification (6–18 months, costly) only when scaling/selling broadly.
 
+- [x] **Secrets management — Scaleway Secret Manager (fr-par, EU).** All credentials
+      (Scaleway keys, GitLab OAuth) are stored in Scaleway's managed Secret Manager:
+      central, encrypted, **versioned, rotatable, IAM-access-controlled, audited** — a
+      concrete control to cite in the security questionnaire. (Note: Scaleway Functions
+      hold an encrypted synced *copy*; Secret Manager is the source of truth — rotation =
+      new version in SM + redeploy the function. Local dev uses secret-lover + `.env`.)
 - [ ] **[contract]** **Information Security Policy** + control set — written, ISO 27001-
       aligned. This is what the security questionnaire actually checks
 - [ ] **[contract]** Be ready for TU Delft's **vendor security assessment** (SURF
